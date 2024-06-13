@@ -6,9 +6,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
-        <main>
-            <LeftSidebar/> 
+    <div className="relative flex flex-col">
+        <main className="relative flex bg-black-3">
+            <LeftSidebar/>
+
+            
             {children}
             <p className="text-white-1">RIGHT SIDEBAR</p>
         </main>
