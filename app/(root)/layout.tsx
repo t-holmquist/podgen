@@ -13,7 +13,7 @@ export default function RootLayout({
         <main className="relative flex bg-black-3">
             <LeftSidebar/>
 
-            <section className="flex flex-col min-h-screen flex-1 px-4 sm:px-14 border-2 border-red-500">
+            <section className="flex flex-col min-h-screen flex-1 px-4 sm:px-14">
               <div className="mx-auto flex flex-col w-full max-w-5xl max-sm:px-4">
                 <div className="flex h-16 items-center justify-between md:hidden">
                   <Image 
@@ -24,7 +24,7 @@ export default function RootLayout({
                     />
                   <MobileNav />
                 </div>
-                <div>
+                <div className="flex flex-col md:pb-14">
                   Toaster
                   {children}
                 </div>
