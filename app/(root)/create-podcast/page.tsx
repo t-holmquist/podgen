@@ -89,9 +89,9 @@ const CreatePodcast = () => {
             name="podcastTitle"
             render={({ field }) => (
               <FormItem className="flex flex-col gap-2.5">
-                <FormLabel className="text-16 font-bold text-white-1">Username</FormLabel>
+                <FormLabel className="text-16 font-bold text-white-1">Title</FormLabel>
                 <FormControl>
-                  <Input className="input-class focus-visible:ring-primaryPink-1" placeholder="Your name here" {...field} />
+                  <Input className="input-class focus-visible:ring-offset-primaryPink-1" placeholder="Your name here" {...field} />
                 </FormControl>
                 <FormMessage className="text-white-1" />
               </FormItem>
@@ -103,10 +103,10 @@ const CreatePodcast = () => {
               </Label>
 
               <Select onValueChange={(value) => setVoiceType(value)}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1')}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-primaryPink-1')}>
                   <SelectValue placeholder="Choose AI Voice" className="placeholder:text-gray-1"/>
                 </SelectTrigger>
-                <SelectContent className="text-16 bg-none bg-black-1 font-bold text-white-1 focus:ring-primaryPink-1">
+                <SelectContent className="text-16 bg-none bg-black-1 font-bold text-white-1 focus:ring-offset-primaryPink-1">
                   {voiceCategories.map((voice) => (
                     <SelectItem key={voice} value={voice} className="capitalize focus:bg-primaryPink-1">
                       {voice}
@@ -130,7 +130,7 @@ const CreatePodcast = () => {
               <FormItem className="flex flex-col gap-2.5">
                 <FormLabel className="text-16 font-bold text-white-1">Description</FormLabel>
                 <FormControl>
-                  <Textarea className="input-class focus-visible:ring-primaryPink-1" placeholder="Write a short description" {...field} />
+                  <Textarea className="input-class focus-visible:ring-offset-primaryPink-1" placeholder="Write a short description" {...field} />
                 </FormControl>
                 <FormMessage className="text-white-1" />
               </FormItem>
@@ -139,7 +139,15 @@ const CreatePodcast = () => {
         </div>
         {/* AI components */}
         <div className="flex flex-col pt-10">
-            <GeneratePodcast />
+            <GeneratePodcast 
+            setAudioStorageId={setAudioStorageId}
+            setAudio={setAudioUrl}
+            voiceType={voiceType}
+            audio={audioUrl}
+            voicePrompt={voicePrompt}
+            setVoicePrompt={setVoicePrompt}
+            setAudioDuration={setAudioDuration}
+            />
 
             <GenerateThumbnail />
 
