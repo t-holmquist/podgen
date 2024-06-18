@@ -8,18 +8,23 @@ import { useAction, useMutation } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { v4 as uuidv4 } from 'uuid';
 import { useUploadFiles } from '@xixixao/uploadstuff/react'
+import { useToast } from "@/components/ui/use-toast"
 
 
 
-// Custom hook for generating audio to grab it in the client
+
+// Custom hook for generating audio
 const useGeneratePodcast = ( {  
   setAudio, voiceType, voicePrompt, setAudioStorageId
 } : GeneratePodcastProps ) => {
   // logic for generating audiofile
   const [isGenerating, setIsGenerating] = useState(false)
 
+  // generate url from convex mutation
   const generateUploadUrl = useMutation(api.files.generateUploadUrl)
   const { startUpload } = useUploadFiles(generateUploadUrl)
+
+  const { toast } = useToast();
 
   // extract convex podcast action created in convex/openai.ts
   const getPodcastAudio = useAction(api.openai.generateAudioAction)
@@ -33,6 +38,9 @@ const useGeneratePodcast = ( {
     setAudio('')
 
     if(!voicePrompt) {
+        toast({
+        title: "Please provide a voice input",
+      })
       return setIsGenerating(false)
     }
 
@@ -60,9 +68,16 @@ const useGeneratePodcast = ( {
       const audioUrl = await getAudioUrl({ storageId })
       setAudio(audioUrl!);
       setIsGenerating(false)
+      toast({
+        title: "Succesfully generated audio",
+      })
 
     } catch (error) {
       console.log('Error generating podcast', error)
+      toast({
+        title: "Error creating audio file",
+        variant: 'destructive',
+      })
       setIsGenerating(false)
     }
 
@@ -92,7 +107,7 @@ const GeneratePodcast = (props : GeneratePodcastProps) => {
       </div>
 
       <div className="mt-5 w-full max-w-[200px]">
-        <Button type="submit" className="text-16 bg-primaryPink-1 py-4 font-bold text-white-1">
+        <Button onClick={generatePodcast} type="submit" className="text-16 bg-primaryPink-1 py-4 font-bold text-white-1">
           {isGenerating ? (
             <>
               Generating
