@@ -27,6 +27,8 @@ import {
 import { cn } from "@/lib/utils"
 import { useState } from "react"
 import { Textarea } from "@/components/ui/textarea"
+import GeneratePodcast from "@/components/GeneratePodcast"
+import GenerateThumbnail from "@/components/GenerateThumbnail"
 
 // OpenAI voices
 const voiceCategories = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
@@ -39,6 +41,9 @@ const formSchema = z.object({
     })
     
 const CreatePodcast = () => {
+
+  // Submit state
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Choosen Voice state for audio functions
   const [voiceType, setVoiceType] = useState<string | null>(null);
@@ -71,7 +76,7 @@ const CreatePodcast = () => {
               <FormItem className="flex flex-col gap-2.5">
                 <FormLabel className="text-16 font-bold text-white-1">Username</FormLabel>
                 <FormControl>
-                  <Input className="input-class focus-visible:ring-primaryBlue-1" placeholder="Your name here" {...field} />
+                  <Input className="input-class focus-visible:ring-primaryPink-1" placeholder="Your name here" {...field} />
                 </FormControl>
                 <FormMessage className="text-white-1" />
               </FormItem>
@@ -86,9 +91,9 @@ const CreatePodcast = () => {
                 <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1')}>
                   <SelectValue placeholder="Choose AI Voice" className="placeholder:text-gray-1"/>
                 </SelectTrigger>
-                <SelectContent className="text-16 bg-none bg-black-1 font-bold text-white-1 focus:ring-primaryBlue-1">
+                <SelectContent className="text-16 bg-none bg-black-1 font-bold text-white-1 focus:ring-primaryPink-1">
                   {voiceCategories.map((voice) => (
-                    <SelectItem key={voice} value={voice} className="capitalize focus:bg-primaryBlue-1">
+                    <SelectItem key={voice} value={voice} className="capitalize focus:bg-primaryPink-1">
                       {voice}
                     </SelectItem>
                   ))}
@@ -110,12 +115,30 @@ const CreatePodcast = () => {
               <FormItem className="flex flex-col gap-2.5">
                 <FormLabel className="text-16 font-bold text-white-1">Description</FormLabel>
                 <FormControl>
-                  <Textarea className="input-class focus-visible:ring-primaryBlue-1" placeholder="Write a short description" {...field} />
+                  <Textarea className="input-class focus-visible:ring-primaryPink-1" placeholder="Write a short description" {...field} />
                 </FormControl>
                 <FormMessage className="text-white-1" />
               </FormItem>
             )}
           />
+        </div>
+        {/* AI components */}
+        <div className="flex flex-col pt-10">
+            <GeneratePodcast />
+
+            <GenerateThumbnail />
+
+            <div className="mt-10 w-full">
+              <Button type="submit" className="text-16 w-full bg-primaryPink-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1">
+                {isSubmitting ? (
+                  <>
+                    Submitting...
+                  </>
+                ): (
+                  'Publish your creation!'
+                )}
+              </Button>
+            </div>
         </div>
       </form>
   </Form>

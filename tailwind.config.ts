@@ -34,8 +34,8 @@ const config = {
           5: "#2E3036",
           6: "#24272C",
         },
-        primaryBlue: {
-          1: "#3B81F6",
+        primaryPink: {
+          1: "#c04a83",
         },
         gray: {
           1: "#71788B",
