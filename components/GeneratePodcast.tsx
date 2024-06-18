@@ -4,9 +4,10 @@ import { Textarea } from "./ui/textarea"
 import { Button } from "./ui/button"
 import { Loader } from "lucide-react"
 import { useState } from "react"
-import { useAction } from "convex/react"
+import { useAction, useMutation } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { v4 as uuidv4 } from 'uuid';
+import { useUploadFiles } from '@xixixao/uploadstuff/react'
 
 
 
@@ -17,8 +18,14 @@ const useGeneratePodcast = ( {
   // logic for generating audiofile
   const [isGenerating, setIsGenerating] = useState(false)
 
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl)
+  const { startUpload } = useUploadFiles(generateUploadUrl)
+
   // extract convex podcast action created in convex/openai.ts
   const getPodcastAudio = useAction(api.openai.generateAudioAction)
+
+  // extract convex mutation from podcasts.ts
+  const getAudioUrl = useMutation(api.podcasts.getUrl);
 
   const generatePodcast = async () => {
     // Reset audio when starting to generate
@@ -41,6 +48,18 @@ const useGeneratePodcast = ( {
       const fileName = `podcast-${uuidv4()}.mp3`
 
       const file = new File([blob], fileName, { type: 'audio/mpeg' });
+
+      // startupload comes from uploadstuff
+
+      const uploaded = await startUpload([file]);
+      const storageId = (uploaded[0].response as any).storageId;
+
+      setAudioStorageId(storageId)
+
+      // get url from convex mutation call created in podcasts.ts
+      const audioUrl = await getAudioUrl({ storageId })
+      setAudio(audioUrl!);
+      setIsGenerating(false)
 
     } catch (error) {
       console.log('Error generating podcast', error)
