@@ -3,19 +3,54 @@ import { Label } from "./ui/label"
 import { Textarea } from "./ui/textarea"
 import { Button } from "./ui/button"
 import { Loader } from "lucide-react"
+import { useState } from "react"
+import { useAction } from "convex/react"
+import { api } from "@/convex/_generated/api"
+import { v4 as uuidv4 } from 'uuid';
 
 
 
-// Custom hook for generating audio
-const useGeneratePodcast = (props: GeneratePodcastProps) => {
-
+// Custom hook for generating audio to grab it in the client
+const useGeneratePodcast = ( {  
+  setAudio, voiceType, voicePrompt, setAudioStorageId
+} : GeneratePodcastProps ) => {
   // logic for generating audiofile
+  const [isGenerating, setIsGenerating] = useState(false)
 
-  return {
-    isGenerating: false,
-    generatePodcast: () => {}
+  // extract convex podcast action created in convex/openai.ts
+  const getPodcastAudio = useAction(api.openai.generateAudioAction)
+
+  const generatePodcast = async () => {
+    // Reset audio when starting to generate
+    setIsGenerating(true);
+    setAudio('')
+
+    if(!voicePrompt) {
+      return setIsGenerating(false)
+    }
+
+    // call extracted convex action to get openai response
+    try {
+      const response = await getPodcastAudio({
+        input: voicePrompt,
+        voice: voiceType,
+      })
+      
+      const blob = new Blob([response], { type: 'audio/mpeg' });
+      // use the uuid library to get random id for each file
+      const fileName = `podcast-${uuidv4()}.mp3`
+
+      const file = new File([blob], fileName, { type: 'audio/mpeg' });
+
+    } catch (error) {
+      console.log('Error generating podcast', error)
+      setIsGenerating(false)
+    }
+
+    
   }
 
+  return {isGenerating, generatePodcast}
 }
 
 const GeneratePodcast = (props : GeneratePodcastProps) => {
