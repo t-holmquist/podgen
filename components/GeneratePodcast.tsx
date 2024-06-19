@@ -57,8 +57,7 @@ const useGeneratePodcast = ( {
 
       const file = new File([blob], fileName, { type: 'audio/mpeg' });
 
-      // startupload comes from uploadstuff
-
+      // Here is the actual upload. startupload() has access to the generated URL from convex mutation in files.ts
       const uploaded = await startUpload([file]);
       const storageId = (uploaded[0].response as any).storageId;
 

@@ -7,20 +7,74 @@ import { Loader } from "lucide-react"
 import { GenerateThumbnailProps } from "@/types"
 import { Input } from "./ui/input"
 import Image from "next/image"
+import { useToast } from "./ui/use-toast"
+import { useMutation } from "convex/react"
+import { api } from "@/convex/_generated/api"
+import { useUploadFiles } from "@xixixao/uploadstuff/react"
 
 const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, setImagePrompt } : GenerateThumbnailProps ) => {
 
   const [isAiThumbnail, setIsAiThumbnail] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(false)
+  const { toast } = useToast();
+  // mutation coming from files.ts and podcasts.ts, startUpload from uploadstuff
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl)
+  const { startUpload } = useUploadFiles(generateUploadUrl)
+  const getImageUrl = useMutation(api.podcasts.getUrl)
 
   // Reference for the Input/upload element to be clicked on div container
   const imageRef = useRef<HTMLInputElement>(null);
 
-  
-  const generateImage = async () => {
+  // called in uploadImage()
+  const handleImage = async (blob: Blob, fileName: string) => {
+    setIsImageLoading(true)
+    setImage('')
 
-  } 
+    try {
+      const file = new File([blob], fileName, { type: 'image/png' });
+      // startupload comes from uploadstuff
+      const uploaded = await startUpload([file]);
+      const storageId = (uploaded[0].response as any).storageId;
+      setImageStorageId(storageId)
+      // get url from convex mutation call created in podcasts.ts
+      const imageUrl = await getImageUrl({ storageId })
+      setImage(imageUrl!)
+      setIsImageLoading(false)
+      toast({
+        title: 'Thumbnail generated successfully',
+      })
 
+    } catch (error) {
+      console.log(error)
+      toast({ title: 'Error generating thumbnail', variant: 'destructive'})
+    }
+  }
+
+  // generate image with AI
+  const generateImage = async () => {}
+
+  // Receives image, get upload URL and upload file to convex
+  const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    try {
+      const files = e.target.files;
+      if(!files) return;
+
+      const file = files[0];
+      const blob = await file.arrayBuffer()
+      .then((ab) => new Blob([ab]));
+
+      handleImage(blob, file.name);
+      
+    } catch (error) {
+      console.log(error)
+      toast({
+        title: 'Error uploading image',
+        variant: 'destructive'
+      })
+    }
+  }
 
   return (
     <>
@@ -78,6 +132,7 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
             type="file"
             className="hidden"
             ref={imageRef}
+            onChange={(e) => {uploadImage(e)}}
           />
           {/* Ready to upload image */}
           {!isImageLoading ? (
@@ -95,6 +150,13 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
             <p className="text-12 font-normal text-gray-1">SVG, JPG, PNG or GIF (max: 1080x1080px)</p>
           </div>
         </div>
+        
+      )}
+      {/* Show image generated if exists */}
+      {image && (
+          <div className="flex-center w-full">
+            <Image src={image} width={200} height={200} className="mt-5" alt="thumbnail"/>
+          </div>
       )}
     </>
   )
