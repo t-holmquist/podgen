@@ -51,7 +51,9 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
   }
 
   // generate image with AI
-  const generateImage = async () => {}
+  const generateImage = async () => {
+    
+  }
 
   // Receives image, get upload URL and upload file to convex
   const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
