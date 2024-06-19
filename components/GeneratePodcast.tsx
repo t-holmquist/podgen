@@ -48,7 +48,7 @@ const useGeneratePodcast = ( {
     try {
       const response = await getPodcastAudio({
         input: voicePrompt,
-        voice: voiceType,
+        voice: voiceType!,
       })
       
       const blob = new Blob([response], { type: 'audio/mpeg' });
@@ -99,7 +99,7 @@ const GeneratePodcast = (props : GeneratePodcastProps) => {
         </Label>
         <Textarea 
           className="input-class font-light focus-visible:ring-offset-primaryPink-1" 
-          placeholder="Your prompt goes here"
+          placeholder="Your text goes here"
           rows={5}
           value={props.voicePrompt}
           onChange={(e) => props.setVoicePrompt(e.target.value)}

@@ -51,7 +51,7 @@ const CreatePodcast = () => {
   const [voiceType, setVoiceType] = useState<VoiceType>(null);
   const [voicePrompt, setVoicePrompt] = useState('')
 
-  const [imagePrompt, setimagePrompt] = useState('')
+  const [imagePrompt, setImagePrompt] = useState('')
   const [imageStorageId, setImageStorageId] = useState<Id<"_storage"> | null>(null)
   const [imageUrl, setImageUrl] = useState('')
 
@@ -59,9 +59,6 @@ const CreatePodcast = () => {
   const [audioUrl, setAudioUrl] = useState('')
   const [audioDuration, setAudioDuration] = useState(0);
 
-  
-
-  
 
   // Define form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -150,7 +147,13 @@ const CreatePodcast = () => {
             setAudioDuration={setAudioDuration}
             />
 
-            <GenerateThumbnail />
+            <GenerateThumbnail 
+            setImage={setImageUrl} 
+            setImageStorageId={setImageStorageId} 
+            image={imageUrl}
+            imagePrompt={imagePrompt} 
+            setImagePrompt={setImagePrompt}
+            />
 
             <div className="mt-10 w-full">
               <Button type="submit" className="text-16 w-full bg-primaryPink-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1">
