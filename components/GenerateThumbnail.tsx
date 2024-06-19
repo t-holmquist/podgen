@@ -8,9 +8,10 @@ import { GenerateThumbnailProps } from "@/types"
 import { Input } from "./ui/input"
 import Image from "next/image"
 import { useToast } from "./ui/use-toast"
-import { useMutation } from "convex/react"
+import { useAction, useMutation } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { useUploadFiles } from "@xixixao/uploadstuff/react"
+import { v4 as uuidv4 } from 'uuid';
 
 const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, setImagePrompt } : GenerateThumbnailProps ) => {
 
@@ -21,6 +22,7 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
   const generateUploadUrl = useMutation(api.files.generateUploadUrl)
   const { startUpload } = useUploadFiles(generateUploadUrl)
   const getImageUrl = useMutation(api.podcasts.getUrl)
+  const handleGenerateThumbnail = useAction(api.openai.generateThumbnailAction);
 
   // Reference for the Input/upload element to be clicked on div container
   const imageRef = useRef<HTMLInputElement>(null);
@@ -50,9 +52,20 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
     }
   }
 
-  // generate image with AI
+  // generate image with AI - handleGenerateThumbnail comes from openai.ts
   const generateImage = async () => {
-    
+    try {
+      const response = await handleGenerateThumbnail({ prompt: imagePrompt })
+      const blob = new Blob([response], { type: 'image/png' });
+      handleImage(blob, `thumbnail-${uuidv4()}`);
+      
+    } catch (error) {
+      console.log(error)
+      toast({
+        title: 'Error generating thumbnail',
+        variant: 'destructive'
+      })
+    }
   }
 
   // Receives image, get upload URL and upload file to convex
@@ -115,7 +128,7 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
           </div>
 
           <div className="w-full max-w-[200px]">
-            <Button type="submit" className="text-16 bg-primaryPink-1 py-4 font-bold text-white-1">
+            <Button onClick={generateImage} type="submit" className="text-16 bg-primaryPink-1 py-4 font-bold text-white-1">
               {isImageLoading ? (
                 <>
                   Generating
