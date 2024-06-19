@@ -56,7 +56,8 @@ export type VoiceType =
   | "fable"
   | "onyx"
   | "nova"
-  | "shimmer";
+  | "shimmer"
+  | null;
 
 export interface GeneratePodcastProps {
   voiceType: VoiceType;

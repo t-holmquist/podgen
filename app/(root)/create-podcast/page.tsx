@@ -31,6 +31,7 @@ import GeneratePodcast from "@/components/GeneratePodcast"
 import GenerateThumbnail from "@/components/GenerateThumbnail"
 import { Loader } from "lucide-react"
 import { Id } from "@/convex/_generated/dataModel"
+import { VoiceType } from "@/types"
 
 // OpenAI voices
 const voiceCategories = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
@@ -47,7 +48,7 @@ const CreatePodcast = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // AI functions state management
-  const [voiceType, setVoiceType] = useState<string | null>(null);
+  const [voiceType, setVoiceType] = useState<VoiceType>(null);
   const [voicePrompt, setVoicePrompt] = useState('')
 
   const [imagePrompt, setimagePrompt] = useState('')
@@ -102,7 +103,7 @@ const CreatePodcast = () => {
                 Choose AI voice
               </Label>
 
-              <Select onValueChange={(value) => setVoiceType(value)}>
+              <Select onValueChange={(value) => setVoiceType(value as VoiceType)}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-primaryPink-1')}>
                   <SelectValue placeholder="Choose AI Voice" className="placeholder:text-gray-1"/>
                 </SelectTrigger>
@@ -142,7 +143,7 @@ const CreatePodcast = () => {
             <GeneratePodcast 
             setAudioStorageId={setAudioStorageId}
             setAudio={setAudioUrl}
-            voiceType={voiceType!}
+            voiceType={voiceType}
             audio={audioUrl}
             voicePrompt={voicePrompt}
             setVoicePrompt={setVoicePrompt}
