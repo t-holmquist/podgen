@@ -20,7 +20,7 @@ export interface TopPodcastersProps {
   name: string;
   podcast: {
     podcastTitle: string;
-    pocastId: Id<"podcast">;
+    podcastId: Id<"podcast">;
   }[];
   totalPodcasts: number;
 }
