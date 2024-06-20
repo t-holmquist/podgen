@@ -6,6 +6,7 @@ import PodcastCard from '@/components/PodcastCard'
 import PodcastDetailPlayer from '@/components/PodcastDetailPlayer'
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
+import { useUser } from '@clerk/nextjs'
 import { useQuery } from 'convex/react'
 import Image from 'next/image'
 import React from 'react'
@@ -14,10 +15,15 @@ const PodcastDetails = ( { params: { podcastId } }: {params: { podcastId: Id<'po
 
   // query current podcast based on id to display it
   const podcast = useQuery(api.podcasts.getPodcastById, { podcastId })
-
   const similarPodcasts = useQuery(api.podcasts.getPodcastByVoiceType, { podcastId })
 
+  // know if current podcast viewed is owned by current user. user.id comes from Clerk.
+  const { user } = useUser();
+  const isOwner = user?.id === podcast?.authorId;
+
+  // loading state if not yet queried
   if(!similarPodcasts || !podcast ) return <LoaderSpinner/>
+
 
   return (
     <section className='flex w-full flex-col'>
@@ -33,7 +39,12 @@ const PodcastDetails = ( { params: { podcastId } }: {params: { podcastId: Id<'po
         </h2>
       </header>
 
-      <PodcastDetailPlayer/>
+      {/* Gets all podcast properties and also know if user owns podcast */}
+      <PodcastDetailPlayer
+      isOwner={isOwner}
+      podcastId={podcast._id}
+      {...podcast}
+      />
 
       <p className='text-white-2 text-16 pb-8 pt-[45px] font-medium max-md:text-center'>
         {podcast?.podcastDescription}
