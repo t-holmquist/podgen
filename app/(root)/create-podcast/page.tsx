@@ -32,6 +32,10 @@ import GenerateThumbnail from "@/components/GenerateThumbnail"
 import { Loader } from "lucide-react"
 import { Id } from "@/convex/_generated/dataModel"
 import { VoiceType } from "@/types"
+import { useToast } from "@/components/ui/use-toast"
+import { useMutation } from "convex/react"
+import { api } from "@/convex/_generated/api"
+import { useRouter } from "next/navigation"
 
 // OpenAI voices
 const voiceCategories = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
@@ -44,10 +48,12 @@ const formSchema = z.object({
     
 const CreatePodcast = () => {
 
+  const router = useRouter();
+
   // Submit state
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // AI functions state management
+  // Audio and image function states
   const [voiceType, setVoiceType] = useState<VoiceType>(null);
   const [voicePrompt, setVoicePrompt] = useState('')
 
@@ -59,6 +65,9 @@ const CreatePodcast = () => {
   const [audioUrl, setAudioUrl] = useState('')
   const [audioDuration, setAudioDuration] = useState(0);
 
+  const { toast } = useToast();
+
+  const createPodcast = useMutation(api.podcasts.createPodcast);
 
   // Define form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -66,14 +75,52 @@ const CreatePodcast = () => {
     defaultValues: {
       podcastTitle: "",
       podcastDescription: "",
+
     },
   })
  
   // Defining a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    
+    try {
+      setIsSubmitting(true)
+      if(!audioUrl || !imageUrl || !voiceType) {
+        toast({
+          title: 'Please generate audio and image'
+        })
+        setIsSubmitting(false)
+        throw new Error('Please generate audio and image')
+      }
+
+      const podcast = await createPodcast({
+        podcastTitle: data.podcastTitle,
+        podcastDescription: data.podcastDescription,
+        audioUrl,
+        imageUrl,
+        voiceType,
+        imagePrompt,
+        voicePrompt,
+        views: 0,
+        audioDuration,
+        audioStorageId: audioStorageId!,
+        imageStorageId: imageStorageId!,
+      })
+      toast({
+        title: 'Succesfully submitted your creation!'
+      })
+      setIsSubmitting(false)
+      router.push('/')
+      
+    } catch (error) {
+      console.log(error)
+      toast({
+        title: 'Error submitting your creation',
+        variant: 'destructive'
+      })
+      setIsSubmitting(false)
+    }
+
+
   }
 
   return (

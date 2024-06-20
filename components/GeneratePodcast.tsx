@@ -63,7 +63,7 @@ const useGeneratePodcast = ( {
 
       setAudioStorageId(storageId)
 
-      // get url from convex mutation call created in podcasts.ts
+      // get audioUrl from convex where audio can be downloaded and played if exists and <audio/> element is rendered
       const audioUrl = await getAudioUrl({ storageId })
       setAudio(audioUrl!);
       setIsGenerating(false)
