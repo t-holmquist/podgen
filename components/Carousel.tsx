@@ -39,7 +39,7 @@ const EmblaCarousel = ( { fansLikeDetail } : CarouselProps) => {
   if(!slides) return <LoaderSpinner />
 
   return (
-    <section className="flex w-full flex-col gap-4 overflow-hidden" ref={emblaRef}>
+    <section className="flex mt-5 w-full flex-col gap-4 overflow-hidden" ref={emblaRef}>
       <div className='flex'>
         {/* slicing 5 top users and displaying their podcast  */}
         {slides.slice(0, 5).map((item) => (
