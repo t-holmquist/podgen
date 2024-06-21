@@ -14,7 +14,7 @@ const RightSidebar = () => {
 
   const topPodcasters = useQuery(api.users.getTopUserByPodcastCount)
 
-  if(!topPodcasters) return <LoaderSpinner/>
+  
 
   const { user } = useUser();
   const router = useRouter();
