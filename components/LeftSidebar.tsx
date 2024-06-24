@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import React from 'react'
 import { Button } from './ui/button';
+import { useAudio } from '@/providers/AudioProvider';
 
 const LeftSidebar = () => {
 
@@ -17,8 +18,11 @@ const LeftSidebar = () => {
   // sign out function coming from Clerk
   const { signOut } = useClerk();
 
+  const { audio } = useAudio();
+
   return (
-    <section className='left_sidebar'>
+    // change sidebar hight depending on audioplaying or not
+    <section className={cn('left_sidebar h-[calc(100vh-5px)]', {'h-[calc(100vh-140px)] :' : audio?.audioUrl})}>
       <nav className='flex flex-col gap-6'>
         <Link href='/' className='flex cursor-pointer items-center gap-2 pb-10 max-lg:justify-center'>
           <Image src='/icons/logo.svg' width={23} height={27} alt='logo'/>
