@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Input } from './ui/input'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
+import { useDebounce } from '@/lib/useDebounce';
 
 const Searchbar = () => {
 
@@ -11,14 +12,19 @@ const Searchbar = () => {
     const router = useRouter();
     const pathname = usePathname();
 
+    // Set a 500ms delay to every search state change (keystroke input) to avoid excessive API calls to Convex. 
+    const debouncedValue = useDebounce(search, 500);
+
+
+
 
     useEffect(() => {
-      if(search) {  
-        router.push(`/discover?search=${search}`)
-      } else if (!search && pathname === '/discover') {
+      if(debouncedValue) {  
+        router.push(`/discover?search=${debouncedValue}`)
+      } else if (!debouncedValue && pathname === '/discover') {
         router.push('/discover')
       }
-    }, [router, pathname, search])
+    }, [router, pathname, debouncedValue])
     
 
   return (
