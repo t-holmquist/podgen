@@ -45,7 +45,7 @@ const Profile = ( { params: { profileId } } : { params: { profileId: string } } 
             <Image src='/icons/headphone.svg' width={18} height={18} alt='headphone'/>
             <p className='text-white-1 text-12'>{userPodcasts?.listeners}<span className='text-white-3 ml-1'>monthly listeners</span></p>
           </div>
-          <Button onClick={handlePlay} className='text-16 w-full bg-primaryPink-1 font-extrabold text-white-1'>
+          <Button onClick={handlePlay} className='text-16 w-full bg-primary-1 font-extrabold text-white-1'>
             Play a random podcast
           </Button>
         </div>

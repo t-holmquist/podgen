@@ -32,7 +32,7 @@ const RightSidebar = () => {
             <h2 className="text-16 truncate font-semibold text-white-1">
               {user?.firstName} {user?.lastName}
             </h2>
-            <Image src='/icons/right-arrow.svg' width={24} height={24} alt="arrow"/>
+            <Image src='/icons/notification.svg' width={15} height={15} alt="arrow"/>
           </div>
         </Link>
       </SignedIn>
@@ -55,7 +55,7 @@ const RightSidebar = () => {
               </figure>
 
               <div className="flex items-center">
-                <p className="text-12 font-normal">{podcaster.totalPodcasts} {podcaster.totalPodcasts > 0 ? 'podcasts' : 'podcast'}</p>
+                <p className="text-12 font-normal text-white-2">{podcaster.totalPodcasts} {podcaster.totalPodcasts > 0 ? 'podcasts' : 'podcast'}</p>
               </div>
             </div>
           ))}

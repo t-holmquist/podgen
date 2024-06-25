@@ -30,7 +30,7 @@ const Searchbar = () => {
   return (
     <div className='relative mt-8 block'>
         <Input 
-        className='input-class py-6 pl-12 focus-visible:ring-offset-primaryPink-1'
+        className='input-class py-6 pl-12 focus-visible:ring-offset-primary-1'
         placeholder='Search for audio'
         value={search}
         onChange={(e) => setSearch(e.target.value)}

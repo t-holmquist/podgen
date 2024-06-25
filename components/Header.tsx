@@ -10,7 +10,7 @@ const Header = ( { headerTitle, titleClassName } : { headerTitle?: string, title
         ) : (
             <div/>
         )}
-        <Link href='/discover' className='text-16 font-semibold text-primaryPink-1'>
+        <Link href='/discover' className='text-16 font-semibold text-primary-1'>
         See all
         </Link>
     </header>

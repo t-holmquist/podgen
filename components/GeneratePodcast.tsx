@@ -97,7 +97,7 @@ const GeneratePodcast = (props : GeneratePodcastProps) => {
           Insert you prompt below
         </Label>
         <Textarea 
-          className="input-class font-light focus-visible:ring-offset-primaryPink-1" 
+          className="input-class font-light focus-visible:ring-offset-primary-1" 
           placeholder="Your text goes here"
           rows={5}
           value={props.voicePrompt}
@@ -106,7 +106,7 @@ const GeneratePodcast = (props : GeneratePodcastProps) => {
       </div>
 
       <div className="mt-5 w-full max-w-[200px]">
-        <Button onClick={generatePodcast} type="submit" className="text-16 bg-primaryPink-1 py-4 font-bold text-white-1">
+        <Button onClick={generatePodcast} type="submit" className="text-16 bg-primary-1 py-4 font-bold text-white-1">
           {isGenerating ? (
             <>
               Generating
