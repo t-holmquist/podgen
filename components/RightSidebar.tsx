@@ -28,15 +28,15 @@ const RightSidebar = () => {
       <SignedIn>
         <Link href={`/profile/${user?.id}`} className="flex gap-3 pb-3">
           <UserButton/>
-          <div className="flex w-full items-center justify-between">
-            <h2 className="text-16 truncate font-semibold text-white-1">
+          <div className="flex w-full items-center gap-3">
+            <h2 className="text-14 truncate font-semibold text-white-1">
               {user?.firstName} {user?.lastName}
             </h2>
-            <Image src='/icons/notification.svg' width={15} height={15} alt="arrow"/>
+            <Image src='/icons/notification.svg' width={15} height={15} alt="notification"/>
           </div>
         </Link>
       </SignedIn>
-      <Header headerTitle='Fans like you'/>
+      <Header headerTitle='Other Creators'/>
       <Carousel fansLikeDetail={topPodcasters!}/>
       <section className="flex flex-col gap-8 pt-12">
         <Header headerTitle='Top podcasters'/>

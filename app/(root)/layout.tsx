@@ -19,10 +19,10 @@ export default function RootLayout({
               <div className="mx-auto flex flex-col w-full max-w-5xl max-sm:px-4">
                 <div className="flex h-16 items-center justify-between md:hidden">
                   <Image 
-                    src='/icons/logo.svg' 
-                    width={30} 
-                    height={30}
-                    alt='menu icon'
+                    src='/icons/logo-diamond.svg' 
+                    width={50} 
+                    height={50}
+                    alt='logo'
                     />
                   <MobileNav />
                 </div>

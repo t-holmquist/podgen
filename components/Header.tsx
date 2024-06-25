@@ -4,13 +4,13 @@ import React from 'react'
 
 const Header = ( { headerTitle, titleClassName } : { headerTitle?: string, titleClassName?: string } ) => {
   return (
-    <header className='flex items-center justify-between'>
+    <header className='flex items-center justify-between mt-5'>
         {headerTitle ? (
             <h1 className={cn('text-18 font-bold text-white-1', titleClassName)}>{headerTitle}</h1>
         ) : (
             <div/>
         )}
-        <Link href='/discover' className='text-16 font-semibold text-primary-1'>
+        <Link href='/discover' className='text-16 font-semibold text-accent-1'>
         See all
         </Link>
     </header>
