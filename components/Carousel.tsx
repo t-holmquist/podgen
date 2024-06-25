@@ -49,7 +49,7 @@ const EmblaCarousel = ( { fansLikeDetail } : CarouselProps) => {
           onClick={() => router.push(`/podcasts/${item.podcast[0]?.podcastId}`)}
           >
             <Image src={item.imageUrl} alt='card' fill className='absolute size-full border-none rounded-xl'/>
-            <div className='relative glassmorphism-black flex flex-col z-10 rounded-b-xl p-4'>
+            <div className='relative glassmorphism-black flex flex-col z-10 rounded-b-xl p-2'>
               <h2 className='text-14 font-semibold text-white-1'>{item.podcast[0]?.podcastTitle}</h2>
               <p className='text-12 font-normal text-white-2'>{item.name}</p>
             </div>

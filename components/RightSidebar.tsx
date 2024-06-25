@@ -36,10 +36,10 @@ const RightSidebar = () => {
           </div>
         </Link>
       </SignedIn>
-      <Header headerTitle='Other Creators'/>
+      <Header headerTitle='Other Creators' link={false}/>
       <Carousel fansLikeDetail={topPodcasters!}/>
-      <section className="flex flex-col gap-8 pt-12">
-        <Header headerTitle='Top podcasters'/>
+      <section className="flex flex-col gap-8 mt-5">
+        <Header headerTitle='Top podcasters' link={true}/>
         <div className="flex flex-col gap-6">
           {topPodcasters?.slice(0, 4).map((podcaster) => (
             <div onClick={() => router.push(`/profile/${podcaster.clerkId}`) } key={podcaster._id} className="flex cursor-pointer justify-between">

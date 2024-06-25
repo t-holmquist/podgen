@@ -18,7 +18,7 @@ html {
     @apply text-16 placeholder:text-16 bg-black-1 rounded-[6px] placeholder:text-gray-1 border-none text-gray-1;
   }
   .podcast_grid {
-    @apply grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4;
+    @apply grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5;
   }
   .right_sidebar {
     @apply sticky right-0 top-0 flex w-[310px] flex-col overflow-y-hidden border-l rounded-3xl border-gray-1 bg-black-3 border-opacity-30 px-[25px] pt-8 max-xl:hidden;
@@ -105,9 +105,9 @@ html {
   -webkit-backdrop-filter: blur(4px);
 }
 .glassmorphism-black {
-  background: rgba(18, 18, 18, 0.64);
-  backdrop-filter: blur(37px);
-  -webkit-backdrop-filter: blur(37px);
+  background: rgba(24, 24, 24, 0.64);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 /* ======= clerk overrides ======== */

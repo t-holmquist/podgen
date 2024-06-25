@@ -10,8 +10,9 @@ import { usePathname, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { Button } from './ui/button';
 import { useAudio } from '@/providers/AudioProvider';
-import { IoIosArrowBack, IoIosArrowForward, IoIosLogOut } from "react-icons/io";
+import { IoIosLogOut } from "react-icons/io";
 import { motion } from "framer-motion"
+import { LucideArrowLeftToLine, LucideArrowRightToLine } from 'lucide-react';
 
 const LeftSidebar = () => {
 
@@ -36,8 +37,8 @@ const LeftSidebar = () => {
     }}
     animate={{
       width: isOpen ? 240 : 80,
-      paddingLeft: isOpen ? '25px' : '5px',
-      paddingRight: isOpen ? '25px' : '5px',
+      paddingLeft: isOpen ? '25px' : '0px',
+      paddingRight: isOpen ? '25px' : '0px',
     }}
     className={cn('left_sidebar h-[calc(100vh-5px)]', {'h-[calc(100vh-140px)] :' : audio?.audioUrl})}>
       <nav className={cn('flex flex-col gap-6', {'gap-10' : isOpen})}>
@@ -50,9 +51,9 @@ const LeftSidebar = () => {
           </Link>
           <button onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? (
-              <IoIosArrowBack className='hover:text-accent-1'/>
+              <LucideArrowLeftToLine size={20} className='hover:text-accent-1'/>
             ): (
-              <IoIosArrowForward />
+              <LucideArrowRightToLine size={20} className='hover:text-accent-1 mr-2'/>
             )}
           </button>
         </div>
@@ -61,7 +62,7 @@ const LeftSidebar = () => {
 
           const isActive = pathname === route || pathname.startsWith(`${route}/`);
 
-          return <motion.div layout ><Link href={route} key={label} className={cn('flex gap-3 items-center py-2 max-lg:px-4 justify-center hover:bg-accent-2 border border-primary-1 rounded-2xl', {'bg-accent-1': isActive})}>
+          return <motion.div layout ><Link href={route} key={label} className={cn('flex gap-3 items-center py-2 mx-3 justify-center hover:bg-accent-2 border border-primary-1 rounded-2xl', {'bg-accent-1': isActive})}>
             <Image src={imgURL} alt={label} width={20} height={20}/>
             {isOpen && (
               <p>{label}</p>
@@ -80,7 +81,7 @@ const LeftSidebar = () => {
       </SignedOut>
       <SignedIn>
         <div className='flex items-center w-full pb-14'>
-          <Button onClick={() => signOut(() => router.push('/'))} className='text-16 w-full hover:bg-accent-2 rounded-2xl border border-primary-1 font-extrabold'>
+          <Button onClick={() => signOut(() => router.push('/'))} className='text-16 w-full hover:bg-accent-2 mx-3 rounded-2xl border border-primary-1 font-extrabold'>
             {isOpen ? (
               'Log Out'
             ) : (
