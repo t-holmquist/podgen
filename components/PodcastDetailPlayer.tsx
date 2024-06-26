@@ -11,6 +11,7 @@ import { PodcastDetailPlayerProps } from "@/types";
 import LoaderSpinner from "./LoaderSpinner";
 import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
+import { FaPlay } from "react-icons/fa";
 
 const PodcastDetailPlayer = ({
   audioUrl,
@@ -93,15 +94,12 @@ const PodcastDetailPlayer = ({
 
           <Button
             onClick={handlePlay}
-            className="text-16 w-full max-w-[250px] bg-primary-1 font-extrabold text-white-1"
+            className="text-16 w-full max-w-[250px] border border-primary-1 font-extrabold rounded-2xl text-white-1 hover:bg-accent-2"
           >
-            <Image
-              src="/icons/Play.svg"
-              width={20}
-              height={20}
-              alt="random play"
-            />{" "}
-            &nbsp; Play podcast
+            <div className="flex items-center gap-2">
+              <FaPlay size={10}/>
+              <p>Play podcast</p>
+            </div>
           </Button>
         </div>
       </div>
