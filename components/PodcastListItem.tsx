@@ -23,7 +23,7 @@ const PodcastCard = ( { imgUrl, title, description, podcastId, views, duration }
       <div className='flex items-center text-white-1 gap-2'>
         <Image src={imgUrl} width={50} height={50} alt={title} />
         <div className='flex flex-col'>
-            <h2 className='text-white-1 text-16 truncate max-w-[250px]'>{title}</h2>
+            <h2 className='text-white-1 font-bold text-16 truncate max-w-[250px]'>{title}</h2>
             <p className='text-white-2 text-14 truncate max-w-[250px]'>{description}</p>
         </div>
       </div>

@@ -25,6 +25,13 @@ export interface TopPodcastersProps {
   totalPodcasts: number;
 }
 
+export interface UserAvatarProps {
+  userId: Id<"users">;
+  imageUrl: string;
+  clerkId: string;
+  name: string;
+}
+
 export interface PodcastProps {
   _id: Id<"podcast">;
   _creationTime: number;
@@ -139,6 +146,7 @@ export interface ProfileCardProps {
   imageUrl: string;
   userFirstName: string;
 }
+
 
 export type UseDotButtonType = {
   selectedIndex: number;

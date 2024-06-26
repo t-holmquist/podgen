@@ -5,6 +5,7 @@ import { api } from "@/convex/_generated/api";
 import { useUser } from '@clerk/nextjs';
 import PodcastListItem from '@/components/PodcastListItem';
 import LoaderSpinner from '@/components/LoaderSpinner';
+import UserAvatar from '@/components/UserAvatar';
 
 
 
@@ -15,10 +16,13 @@ const Home = () => {
   // get podcasts from convex db
   const trendingPodcasts= useQuery(api.podcasts.getTrendingPodcasts);
 
+  // get top users by podcast count
+  const topPodcasters = useQuery(api.users.getTopUserByPodcastCount);
+
   // get user and display name if exists
   const { user } = useUser();
 
-  if(!user || !trendingPodcasts) return <LoaderSpinner />
+  if(!user || !trendingPodcasts || !topPodcasters) return <LoaderSpinner />
   
 
   return (
@@ -40,11 +44,12 @@ const Home = () => {
           ))}
         </div>
         <h2 className='text-16 font-bold text-white-1 mt-5'>Most popular podcasts</h2>
-        <section className='flex justify-between items-center border-gray-1 border-opacity-30 border-b py-1 mt-5'>
+        <div className='flex justify-between items-center border-gray-1 border-opacity-30 border-b py-1 mt-5'>
           <div className='text-white-2'>Title</div>
           <div className='text-white-2 ml-72'>Views</div>
           <div className='text-white-2'>Duration</div>
-        </section>
+        </div>
+        <section>
         {trendingPodcasts?.slice(0, 4).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
             <PodcastListItem
             key={_id}
@@ -56,6 +61,18 @@ const Home = () => {
             podcastId={_id}
             />
         ))}
+        </section>
+        <h2 className='text-16 font-bold text-white-1 mt-5'>You might also like</h2>
+        <section className='podcast_grid'>
+          {topPodcasters?.slice(0, 5).map((podcaster) => (
+            <UserAvatar
+            userId={podcaster._id}
+            name={podcaster.name}
+            imageUrl={podcaster.imageUrl}
+            clerkId={podcaster.clerkId}
+            />
+          ))}
+        </section>
       </section>
     </div>
   )
