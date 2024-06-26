@@ -23,7 +23,7 @@ const RightSidebar = () => {
   const { audio } = useAudio();
 
   return (
-    <section className={cn('right_sidebar h-[calc(100vh-5px)]', {'h-[calc(100vh-140px)] :' : audio?.audioUrl})}>
+    <section className={cn('right_sidebar h-[calc(100vh-5px)]', {'h-[calc(100vh-90px)] :' : audio?.audioUrl})}>
       {/* If user is signed in then render jsx inside */}
       <SignedIn>
         <Link href={`/profile/${user?.id}`} className="flex gap-3 pb-3">

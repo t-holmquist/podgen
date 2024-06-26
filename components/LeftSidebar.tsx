@@ -40,7 +40,7 @@ const LeftSidebar = () => {
       paddingLeft: isOpen ? '25px' : '0px',
       paddingRight: isOpen ? '25px' : '0px',
     }}
-    className={cn('left_sidebar h-[calc(100vh-5px)]', {'h-[calc(100vh-140px)] :' : audio?.audioUrl})}>
+    className={cn('left_sidebar h-[calc(100vh-5px)]', {'h-[calc(100vh-90px)] :' : audio?.audioUrl})}>
       <nav className={cn('flex flex-col gap-6', {'gap-10' : isOpen})}>
         <div className='flex items-center justify-between pb-10'>
           <Link href='/' className='flex items-center cursor-pointer'>

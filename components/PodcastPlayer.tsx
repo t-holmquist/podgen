@@ -17,6 +17,7 @@ const PodcastPlayer = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const { audio } = useAudio();
 
+
   const togglePlayPause = () => {
     if (audioRef.current?.paused) {
       audioRef.current?.play();
@@ -53,21 +54,25 @@ const PodcastPlayer = () => {
     }
   };
 
+  // Updates the progress bar and sets a fixed timeout to prevent stuttering when the browser renders.
   useEffect(() => {
-    const updateCurrentTime = () => {
+    let timeoutId: any;
+
+    const updateProgress = () => {
       if (audioRef.current) {
         setCurrentTime(audioRef.current.currentTime);
       }
+      // Update every 100 milliseconds (adjust as needed)
+      timeoutId = setTimeout(updateProgress, 70);
     };
-
-    const audioElement = audioRef.current;
-    if (audioElement) {
-      audioElement.addEventListener("timeupdate", updateCurrentTime);
-
-      return () => {
-        audioElement.removeEventListener("timeupdate", updateCurrentTime);
-      };
-    }
+  
+    // Start the update loop
+    updateProgress();
+  
+    return () => {
+      // Clear the timeout to prevent memory leaks
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   useEffect(() => {
@@ -99,13 +104,7 @@ const PodcastPlayer = () => {
         hidden: !audio?.audioUrl || audio?.audioUrl === "",
       })}
     >
-      {/* change the color for indicator inside the Progress component in ui folder */}
-      <Progress
-        value={(currentTime / duration) * 100}
-        className="w-full"
-        max={duration}
-      />
-      <section className="glassmorphism-black flex h-[112px] w-full items-center justify-between px-4 max-md:justify-center max-md:gap-5 md:px-12">
+      <section className="flex h-[70px] bg-black-3 border border-gray-1 border-opacity-30 w-full items-center justify-between px-4 max-md:justify-center max-md:gap-5 md:px-12">
         <audio
           ref={audioRef}
           src={audio?.audioUrl}
@@ -117,8 +116,8 @@ const PodcastPlayer = () => {
           <Link href={`/podcast/${audio?.podcastId}`}>
             <Image
               src={audio?.imageUrl! || "/images/player1.png"}
-              width={64}
-              height={64}
+              width={50}
+              height={50}
               alt="player1"
               className="aspect-square rounded-xl"
             />
@@ -130,35 +129,36 @@ const PodcastPlayer = () => {
             <p className="text-12 font-normal text-white-2">{audio?.author}</p>
           </div>
         </div>
-        <div className="flex-center cursor-pointer gap-3 md:gap-6">
-          <div className="flex items-center gap-1.5">
+        {/* Player flexbox */}
+          <div className="flex cursor-pointer gap-3 md:gap-6 ">
+            <div className="flex items-center gap-1.5">
+              <Image
+                src={"/icons/reverse.svg"}
+                width={18}
+                height={18}
+                alt="rewind"
+                onClick={rewind}
+              />
+              <h2 className="text-12 font-bold text-white-4">-5</h2>
+            </div>
             <Image
-              src={"/icons/reverse.svg"}
-              width={24}
-              height={24}
-              alt="rewind"
-              onClick={rewind}
+              src={isPlaying ? "/icons/Pause.svg" : "/icons/Play.svg"}
+              width={18}
+              height={18}
+              alt="play"
+              onClick={togglePlayPause}
             />
-            <h2 className="text-12 font-bold text-white-4">-5</h2>
+            <div className="flex items-center gap-1.5">
+              <h2 className="text-12 font-bold text-white-4">+5</h2>
+              <Image
+                src={"/icons/forward.svg"}
+                width={18}
+                height={18}
+                alt="forward"
+                onClick={forward}
+              />
+            </div>
           </div>
-          <Image
-            src={isPlaying ? "/icons/Pause.svg" : "/icons/Play.svg"}
-            width={30}
-            height={30}
-            alt="play"
-            onClick={togglePlayPause}
-          />
-          <div className="flex items-center gap-1.5">
-            <h2 className="text-12 font-bold text-white-4">+5</h2>
-            <Image
-              src={"/icons/forward.svg"}
-              width={24}
-              height={24}
-              alt="forward"
-              onClick={forward}
-            />
-          </div>
-        </div>
         <div className="flex items-center gap-6">
           <h2 className="text-16 font-normal text-white-2 max-md:hidden">
             {formatTime(duration)}
@@ -166,8 +166,8 @@ const PodcastPlayer = () => {
           <div className="flex w-full gap-2">
             <Image
               src={isMuted ? "/icons/unmute.svg" : "/icons/mute.svg"}
-              width={24}
-              height={24}
+              width={18}
+              height={18}
               alt="mute unmute"
               onClick={toggleMute}
               className="cursor-pointer"
@@ -175,6 +175,12 @@ const PodcastPlayer = () => {
           </div>
         </div>
       </section>
+        {/* change the color for indicator inside the Progress component in ui folder */}
+        <Progress
+          value={(currentTime / duration) * 100}
+          className="w-full"
+          max={duration}
+          />
     </div>
   );
 };
