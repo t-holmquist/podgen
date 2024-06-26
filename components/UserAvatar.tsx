@@ -9,13 +9,13 @@ const UserAvatar = ( { imageUrl, name, clerkId} : UserAvatarProps) => {
 
   return (
     <div onClick={() => router.push(`/profile/${clerkId}`)} className='cursor-pointer hover:bg-black-1 mt-5 rounded-lg'>
-      <figure className='flex flex-col gap-2 p-3'>
+      <figure className='flex flex-col items-center gap-2'>
         <Image 
           src={imageUrl}
           width={200}
           height={200}
           alt={name}
-          className='aspect-square h-fit w-full rounded-full 2xl:size-[150px]'
+          className='h-fit w-full rounded-full sm:w-40 2xl:size-[150px]'
         />
         <div className='flex flex-col'>
           <h2 className='text-14 truncate font-bold text-white-1'>{name}</h2>
