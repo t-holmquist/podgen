@@ -16,16 +16,16 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
   return (
     <div className='flex flex-col gap-9'>
       <Searchbar />
-      <div className='flex flex-col gap-9'>
-        <h1 className='text-20 font-bold text-white-1'>
-          {!search ? 'Discover Trending Podcasts' : 'Search results for '}
+      <div className='flex flex-col gap-5'>
+        <h1 className='text-16 font-bold text-white-1'>
+          {!search ? 'Search for Podcast' : 'Search results for '}
           {search && <span className='text-white-2'>{search}</span>}
         </h1>
         {podcastsData ? (
           <>
             {podcastsData.length > 0 ? (
               <div className='podcast_grid'>
-                {podcastsData?.map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (
+                {podcastsData?.slice(0, 4).map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (
                   <PodcastCard
                   key={_id}
                   imgUrl={imageUrl!}
@@ -42,6 +42,14 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
         ) : (
           <LoaderSpinner />
         )}
+        <h2 className='text-16 font-bold text-white-1'>Discover by category</h2>
+        {/* Categories */}
+        <div className='flex gap-2'>
+          <button className='text-white-1 text-12 bg-primary-1 rounded-2xl p-2 font-bold'>Food</button>
+          <button className='text-white-1 text-12 bg-primary-1 rounded-2xl p-2 font-bold'>Technology</button>
+          <button className='text-white-1 text-12 bg-primary-1 rounded-2xl p-2 font-bold'>Health</button>
+          <button className='text-white-1 text-12 bg-primary-1 rounded-2xl p-2 font-bold'>Pop culture</button>
+        </div>
       </div>
     </div>
   )
