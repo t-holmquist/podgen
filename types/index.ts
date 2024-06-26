@@ -121,6 +121,15 @@ export interface PodcastCardProps {
   podcastId: Id<"podcast">;
 }
 
+export interface PodcastListItemProps {
+  imgUrl: string;
+  title: string;
+  description: string;
+  views: number;
+  duration: number;
+  podcastId: Id<"podcast">;
+}
+
 export interface CarouselProps {
   fansLikeDetail: TopPodcastersProps[];
 }
