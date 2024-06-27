@@ -10,10 +10,12 @@ import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { useAudio } from "@/providers/AudioProvider";
 import { cn } from "@/lib/utils";
+import PodcastListItem from "./PodcastListItem";
 
 const RightSidebar = () => {
 
   const topPodcasters = useQuery(api.users.getTopUserByPodcastCount)
+  const trendingPodcasts = useQuery(api.podcasts.getTrendingPodcasts)
 
   
 
@@ -60,6 +62,20 @@ const RightSidebar = () => {
             </div>
           ))}
         </div>
+      </section>
+      <section className="flex flex-col truncate mt-10">
+        <h2 className='text-16 font-bold text-white-1 mb-5'>Recently Added</h2>
+          {trendingPodcasts?.slice(0, 3).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
+              <PodcastListItem
+              key={_id}
+              imgUrl={imageUrl!}
+              views={views}
+              duration={audioDuration}
+              title={podcastTitle}
+              description={podcastDescription}
+              podcastId={_id}
+              />
+          ))}
       </section>
     </section>
   )

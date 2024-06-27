@@ -33,7 +33,7 @@ const Home = () => {
       <section className='flex flex-col'>
         <h2 className='text-16 font-bold text-white-1'>{user ? 'Continue where you left off' : 'Many people like these'}</h2>
         <div className='podcast_grid mt-5'>
-          {trendingPodcasts?.slice(0, 4).map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (
+          {trendingPodcasts?.slice(0, 10).map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (
             <PodcastCard
             key={_id}
             imgUrl={imageUrl!}
@@ -50,7 +50,7 @@ const Home = () => {
           <div className='text-white-2'>Duration</div>
         </div>
         <section>
-        {trendingPodcasts?.slice(0, 4).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
+        {trendingPodcasts?.slice(0, 10).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
             <PodcastListItem
             key={_id}
             imgUrl={imageUrl!}
@@ -62,7 +62,7 @@ const Home = () => {
             />
         ))}
         </section>
-        <h2 className='text-16 font-bold text-white-1 mt-5'>You might also like</h2>
+        <h2 className='text-16 font-bold text-white-1 mt-5'>Other creators you might like</h2>
         <section className='podcast_grid'>
           {topPodcasters?.slice(0, 5).map((podcaster) => (
             <UserAvatar

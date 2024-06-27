@@ -49,11 +49,11 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
         ) : (
           <LoaderSpinner />
         )}
-        <h2 className='text-16 font-bold text-white-1'>Discover by category</h2>
+        <h2 className='text-16 font-bold text-white-1'>Discover by category: <span className='text-white-2'>{category}</span></h2>
         {/* Categories */}
         <div className='flex gap-2 text-white-1'>
           {categories.map((categorySelected) => (
-            <button onClick={() => setCategory(categorySelected)} className={cn('bg-accent-1 text-12 hover:bg-accent-3 rounded-2xl p-2 font-bold', { 'bg-primary-1' : categorySelected === category } )}>{categorySelected}</button>
+            <button onClick={() => setCategory(categorySelected)} className={cn('bg-black-5 text-12 hover:bg-black-6 rounded-2xl p-2 font-bold', { 'bg-primary-1' : categorySelected === category } )}>{categorySelected}</button>
           ))}
         </div>
         {podcastByCategory && (
@@ -76,7 +76,7 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
           <div className='text-white-2'>Duration</div>
         </div>
         <section>
-        {TopPodcastByCategory?.slice(0, 4).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
+        {TopPodcastByCategory?.slice(0, 5).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
             <PodcastListItem
             key={_id}
             imgUrl={imageUrl!}

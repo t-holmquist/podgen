@@ -45,17 +45,17 @@ const PodcastDetails = ( { params: { podcastId } }: {params: { podcastId: Id<'po
       podcastId={podcast._id}
       {...podcast}
       />
-
-      <p className='text-white-2 text-16 pb-8 pt-[45px] font-medium max-md:text-center'>
-        {podcast?.podcastDescription}
-      </p>
       <div className='flex flex-col gap-8'>
+        <div className='flex flex-col gap-4 mt-5'>
+          <h2 className='text-18 text-white-1 font-bold'>Description</h2>
+          <p className='text-16 font-medium text-white-2'>{podcast?.podcastDescription}</p>
+        </div>
         <div className='flex flex-col gap-4'>
-          <h1 className='text-18 text-white-1 font-bold'>Transcription</h1>
+          <h2 className='text-18 text-white-1 font-bold'>Transcription</h2>
           <p className='text-16 font-medium text-white-2'>{podcast?.voicePrompt}</p>
         </div>
         <div className='flex flex-col gap-4'>
-          <h1 className='text-18 text-white-1 font-bold'>Thumbnail prompt</h1>
+          <h2 className='text-18 text-white-1 font-bold'>Thumbnail prompt</h2>
           <p className='text-16 font-medium text-white-2'>{podcast?.imagePrompt}</p>
         </div>
       </div>
