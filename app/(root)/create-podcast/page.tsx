@@ -31,14 +31,12 @@ import GeneratePodcast from "@/components/GeneratePodcast"
 import GenerateThumbnail from "@/components/GenerateThumbnail"
 import { Loader } from "lucide-react"
 import { Id } from "@/convex/_generated/dataModel"
-import { VoiceType } from "@/types"
+import { CategoryType, VoiceType } from "@/types"
 import { useToast } from "@/components/ui/use-toast"
 import { useMutation } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { useRouter } from "next/navigation"
-
-// OpenAI voices
-const voiceCategories = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
+import { categories, voiceCategories } from "@/constants"
 
 
 const formSchema = z.object({
@@ -65,6 +63,9 @@ const CreatePodcast = () => {
   const [audioUrl, setAudioUrl] = useState('')
   const [audioDuration, setAudioDuration] = useState(0);
 
+  // State for setting category
+  const [category, setCategory] = useState<CategoryType>(null)
+
   const { toast } = useToast();
 
   const createPodcast = useMutation(api.podcasts.createPodcast);
@@ -84,7 +85,7 @@ const CreatePodcast = () => {
     
     try {
       setIsSubmitting(true)
-      if(!audioUrl || !imageUrl || !voiceType) {
+      if(!audioUrl || !imageUrl || !voiceType || !category) {
         toast({
           title: 'Please generate audio and image'
         })
@@ -104,6 +105,7 @@ const CreatePodcast = () => {
         audioDuration,
         audioStorageId: audioStorageId!,
         imageStorageId: imageStorageId!,
+        category,
       })
       toast({
         title: 'Succesfully submitted your creation!'
@@ -149,7 +151,7 @@ const CreatePodcast = () => {
 
               <Select onValueChange={(value) => setVoiceType(value as VoiceType)}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-primary-1')}>
-                  <SelectValue placeholder="Choose AI Voice" className="placeholder:text-gray-1"/>
+                  <SelectValue placeholder="Select a voice you like" className="placeholder:text-gray-1"/>
                 </SelectTrigger>
                 <SelectContent className="text-16 bg-none bg-black-1 font-bold text-white-1 focus:ring-offset-primary-1">
                   {voiceCategories.map((voice) => (
@@ -166,6 +168,25 @@ const CreatePodcast = () => {
                   className="hidden"
                   />
                 )}
+              </Select>
+          </div>
+          {/* Categories selector */}
+          <div className="flex flex-col gap-2.5">
+              <Label className="text-16 font-bold text-white-1">
+                Choose Category
+              </Label>
+
+              <Select onValueChange={(value) => setCategory(value as CategoryType)}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-primary-1')}>
+                  <SelectValue placeholder="Pick most relevant category" className="placeholder:text-gray-1"/>
+                </SelectTrigger>
+                <SelectContent className="text-16 bg-none bg-black-1 font-bold text-white-1 focus:ring-offset-primary-1">
+                  {categories.map((category) => (
+                    <SelectItem key={category} value={category} className="capitalize focus:bg-primary-1">
+                      {category}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
               </Select>
           </div>
           <FormField

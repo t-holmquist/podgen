@@ -46,6 +46,7 @@ const config = {
         accent: {
           1: '#d674c5',
           2: '#D182C3',
+          3: '#DF9ED3',
         },
         gray: {
           1: "#71788B",

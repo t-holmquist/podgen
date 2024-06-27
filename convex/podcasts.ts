@@ -1,5 +1,4 @@
 import { ConvexError, v } from "convex/values";
-
 import { mutation, query } from "./_generated/server";
 
 // create podcast mutation
@@ -16,6 +15,7 @@ export const createPodcast = mutation({
     voiceType: v.string(),
     views: v.number(),
     audioDuration: v.number(),
+    category: v.string(),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -49,6 +49,7 @@ export const createPodcast = mutation({
       views: args.views,
       authorImageUrl: user[0].imageUrl,
       audioDuration: args.audioDuration,
+      category: args.category,
     });
   },
 });
@@ -99,6 +100,35 @@ export const getPodcastById = query({
     return await ctx.db.get(args.podcastId);
   },
 });
+
+// this query will get the podcast by category.
+export const getPodcastByCategory = query({
+  args: {
+    category: v.string(),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db
+    .query("podcast")
+    .filter((q) => q.eq(q.field("category"), args.category))
+    .collect();
+  },
+});
+
+// this query will get the toppodcast by category.
+export const getTopPodcastByCategory = query({
+  args: {
+    category: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const podcasts = await ctx.db
+    .query("podcast")
+    .filter((q) => q.eq(q.field("category"), args.category))
+    .collect();
+
+    return podcasts.sort((a, b) => b.views - a.views).slice(0, 8);
+  },
+});
+
 
 // this query will get the podcasts based on the views of the podcast , which is displayed in the Trending Podcasts section.
 export const getTrendingPodcasts = query({

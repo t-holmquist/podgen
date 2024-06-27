@@ -50,6 +50,7 @@ export interface PodcastProps {
   voiceType: string;
   audioDuration: number;
   views: number;
+  category: string;
 }
 
 export interface ProfilePodcastProps {
@@ -65,6 +66,18 @@ export type VoiceType =
   | "nova"
   | "shimmer"
   | null;
+
+export type CategoryType =
+| "News & Politics"
+| "Comedy"
+| "Education"
+| "Business"
+| "Health & Fitness"
+| "Sports"
+| "Pop Culture"
+| null;
+
+
 
 export interface GeneratePodcastProps {
   voiceType: VoiceType;
