@@ -65,7 +65,7 @@ const RightSidebar = () => {
       </section>
       <section className="flex flex-col mt-10">
         <h2 className='text-16 font-bold text-white-1 mb-5'>Recently Added</h2>
-          {trendingPodcasts?.slice(0, 4).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
+          {trendingPodcasts?.slice(0, 3).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
               <PodcastListItem
               key={_id}
               imgUrl={imageUrl!}
