@@ -7,7 +7,7 @@ import Link from 'next/link'
 const EmptyState = ( { title, search, buttonLink, buttonText } : EmptyStateProps) => {
   return (
     <section className='flex-center size-full flex-col gap-3'>
-        <Image src='/icons/emptystate.svg' width={250} height={250} alt='empty state'/>
+        <Image src='/icons/emptyState.svg' width={250} height={250} alt='empty-state'/>
         <div className='flex-center w-full max-w-[254px] flex-col gap-3'>
             <h1 className='text-16 text-center font-medium text-white-1'>
                 {title}
