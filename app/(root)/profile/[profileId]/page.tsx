@@ -14,11 +14,13 @@ const Profile = ( { params: { profileId } } : { params: { profileId: string } } 
   const user = useQuery(api.users.getUserById, { clerkId: profileId})
   const userPodcasts = useQuery(api.podcasts.getPodcastByAuthorId, { authorId: profileId})
 
+  // Hook into global audio state from AudioProvider
+  const { setAudio } = useAudio();
+
   const randomPodcast = userPodcasts?.podcasts[Math.floor(Math.random() * userPodcasts.podcasts.length)]
   if(!userPodcasts || !randomPodcast || !user ) return <LoaderSpinner/>
 
-  // Hook into global audio state from AudioProvider
-  const { setAudio } = useAudio();
+  
 
   const handlePlay = () => {
     setAudio({

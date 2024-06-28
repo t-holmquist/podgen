@@ -71,6 +71,7 @@ const Home = () => {
             name={podcaster.name}
             imageUrl={podcaster.imageUrl}
             clerkId={podcaster.clerkId}
+            key={podcaster._id}
             />
           ))}
         </section>
