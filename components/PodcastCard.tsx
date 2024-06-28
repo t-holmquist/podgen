@@ -15,7 +15,7 @@ const PodcastCard = ( { imgUrl, title, description, podcastId } : PodcastCardPro
   }
 
   return (
-    <div onClick={handleViews} className='cursor-pointer hover:bg-black-1 rounded-lg'>
+    <div key={podcastId} onClick={handleViews} className='cursor-pointer hover:bg-black-1 rounded-lg'>
       <figure className='flex flex-col gap-2 p-3'>
         <Image 
           src={imgUrl}

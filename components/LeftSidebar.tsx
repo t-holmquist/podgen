@@ -62,7 +62,7 @@ const LeftSidebar = () => {
 
           const isActive = pathname === route || pathname.startsWith(`${route}/`);
 
-          return <motion.div layout ><Link href={route} key={label} className={cn('flex gap-3 items-center py-2 mx-3 justify-center hover:bg-accent-2 border border-primary-1 rounded-2xl', {'bg-accent-1': isActive})}>
+          return <motion.div layout key={label} ><Link href={route} key={label} className={cn('flex gap-3 items-center py-2 mx-3 justify-center hover:bg-accent-2 border border-primary-1 rounded-2xl', {'bg-accent-1': isActive})}>
             <Image src={imgURL} alt={label} width={20} height={20}/>
             {isOpen && (
               <p>{label}</p>

@@ -53,7 +53,7 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
         {/* Categories */}
         <div className='flex gap-2 text-white-1'>
           {categories.map((categorySelected) => (
-            <button onClick={() => setCategory(categorySelected)} className={cn('bg-black-5 text-12 hover:bg-black-6 rounded-2xl p-2 font-bold', { 'bg-primary-1' : categorySelected === category } )}>{categorySelected}</button>
+            <button key={categorySelected} onClick={() => setCategory(categorySelected)} className={cn('bg-black-5 text-12 hover:bg-black-6 rounded-2xl p-2 font-bold', { 'bg-primary-1' : categorySelected === category } )}>{categorySelected}</button>
           ))}
         </div>
         {podcastByCategory && (
