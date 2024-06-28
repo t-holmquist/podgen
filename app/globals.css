@@ -112,8 +112,13 @@ html {
 
 /* ======= clerk overrides ======== */
 .cl-socialButtonsIconButton {
-  border: 2px solid #222429;
+  background-color: #2E3036;
 }
+
+.cl-socialButtonsIconButton:hover {
+  background-color: #24272C;
+}
+
 .cl-button {
   color: white;
 }
@@ -121,13 +126,18 @@ html {
   filter: invert(1);
 }
 .cl-internal-b3fm6y {
-  background: #c04a83;
+  background: #6D27D9;
 }
 .cl-formButtonPrimary {
-  background: #c04a83;
+  background: #6D27D9;
 }
+
+.cl-formButtonPrimary:hover {
+  background: #7d39e4;
+}
+
 .cl-footerActionLink {
-  color: #c04a83;
+  color: #6D27D9;
 }
 .cl-headerSubtitle {
   color: #c5d0e6;
@@ -144,5 +154,5 @@ html {
   color: white;
 }
 .cl-internal-wkkub3 {
-  color: #c04a83;
+  color: #6D27D9;
 }
