@@ -7,7 +7,7 @@ import PodcastListItem from '@/components/PodcastListItem';
 import Searchbar from '@/components/Searchbar';
 import { categories } from '@/constants';
 import { api } from '@/convex/_generated/api'
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 import { useQuery } from 'convex/react'
 import React, { useState } from 'react'
 

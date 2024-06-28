@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import { Button } from "./ui/button"
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils/cn"
 import { Label } from "./ui/label"
 import { Textarea } from "./ui/textarea"
 import { Loader } from "lucide-react"

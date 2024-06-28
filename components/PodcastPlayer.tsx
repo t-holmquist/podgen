@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import { formatTime } from "@/lib/formatTime";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { useAudio } from "@/providers/AudioProvider";
 
 import { Progress } from "./ui/progress";

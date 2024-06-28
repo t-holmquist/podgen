@@ -9,7 +9,7 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { useAudio } from "@/providers/AudioProvider";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import PodcastListItem from "./PodcastListItem";
 
 const RightSidebar = () => {

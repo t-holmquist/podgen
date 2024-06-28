@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { IoMdMusicalNote } from 'react-icons/io'
 import { FaClock } from "react-icons/fa";
 import { formatTime } from "@/lib/formatTime";
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/cn'
 
 const PodcastCard = ( { imgUrl, title, description, podcastId, views, duration, isCompact } : PodcastListItemProps ) => {
 

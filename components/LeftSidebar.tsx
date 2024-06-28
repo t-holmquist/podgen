@@ -2,7 +2,7 @@
 
 
 import { sidebarLinks } from '@/constants'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/cn'
 import { SignedIn, SignedOut, useClerk } from '@clerk/nextjs';
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,6 +13,8 @@ import { useAudio } from '@/providers/AudioProvider';
 import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
 import { motion } from "framer-motion"
 import { LucideArrowLeftToLine, LucideArrowRightToLine } from 'lucide-react';
+import { GlareCard } from './ui/glare-card';
+import { FaGithub } from 'react-icons/fa';
 
 const LeftSidebar = () => {
 
@@ -71,31 +73,47 @@ const LeftSidebar = () => {
           </motion.div>
           })}
       </nav>
-      {/* Different view depending on signin/out status */}
-      <SignedOut>
-        <div className='flex-center items-center w-full pb-14'>
-          <Button asChild className='text-16 w-full hover:bg-accent-2 mx-3 rounded-2xl border border-primary-1 font-extrabold'>
-            {isOpen ? (
-              <Link href='/sign-in'>Sign in</Link>
-            ) : (
-              <Link href='/sign-in'>
-                <IoIosLogIn />
-              </Link>
-            )} 
-          </Button>
-        </div>
-      </SignedOut>
-      <SignedIn>
-        <div className='flex items-center w-full pb-14'>
-          <Button onClick={() => signOut(() => router.push('/'))} className='text-16 w-full hover:bg-accent-2 mx-3 rounded-2xl border border-primary-1 font-extrabold'>
-            {isOpen ? (
-              'Log Out'
-            ) : (
-              <IoIosLogOut />
-            )}
-          </Button>
-        </div>
-      </SignedIn>
+      <div className='flex flex-col gap-10'>
+        {isOpen && (
+          <motion.div layout>
+            <Link href='https://github.com/t-holmquist/podgen'>
+              <GlareCard className='flex flex-col items-start justify-start py-8 px-6 gap-2'>
+                <h2 className='font-extrabold'>This is a porfolio project</h2>
+                <p className='text-12 text-white-2'>It is developed by myself <span className='text-white-1 font-bold'>Tjalfe Holmquist</span>
+                <br></br>
+                Read more on GitHub
+                </p>
+                <FaGithub size={20}/>
+              </GlareCard>
+            </Link>
+          </motion.div>
+        )}
+        {/* Different view depending on signin/out status */}
+        <SignedOut>
+          <div className='flex-center items-center w-full pb-14'>
+            <Button asChild className='text-16 w-full hover:bg-accent-2 mx-3 rounded-2xl border border-primary-1 font-extrabold'>
+              {isOpen ? (
+                <Link href='/sign-in'>Sign in</Link>
+              ) : (
+                <Link href='/sign-in'>
+                  <IoIosLogIn />
+                </Link>
+              )} 
+            </Button>
+          </div>
+        </SignedOut>
+        <SignedIn>
+          <div className='flex items-center w-full pb-14'>
+            <Button onClick={() => signOut(() => router.push('/'))} className='text-16 w-full hover:bg-accent-2 mx-3 rounded-2xl border border-primary-1 font-extrabold'>
+              {isOpen ? (
+                'Log Out'
+              ) : (
+                <IoIosLogOut />
+              )}
+            </Button>
+          </div>
+        </SignedIn>
+      </div>
     </motion.div>
   )
 }

@@ -5,7 +5,7 @@ import React, {
     useState
   } from 'react'
   import { EmblaCarouselType } from 'embla-carousel'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/cn'
   
   type UseDotButtonType = {
     selectedIndex: number
