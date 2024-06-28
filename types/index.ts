@@ -148,6 +148,7 @@ export interface PodcastListItemProps {
   views: number;
   duration: number;
   podcastId: Id<"podcast">;
+  isCompact: boolean;
 }
 
 export interface CarouselProps {

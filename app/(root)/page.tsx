@@ -59,6 +59,7 @@ const Home = () => {
             title={podcastTitle}
             description={podcastDescription}
             podcastId={_id}
+            isCompact={false}
             />
         ))}
         </section>

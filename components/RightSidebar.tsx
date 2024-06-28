@@ -40,11 +40,11 @@ const RightSidebar = () => {
       </SignedIn>
       <Header headerTitle='Other Creators' link={false}/>
       <Carousel fansLikeDetail={topPodcasters!}/>
-      <section className="flex flex-col gap-8 mt-5">
+      <section className="flex flex-col mt-5">
         <Header headerTitle='Top podcasters' link={true}/>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2 mt-5">
           {topPodcasters?.slice(0, 4).map((podcaster) => (
-            <div onClick={() => router.push(`/profile/${podcaster.clerkId}`) } key={podcaster._id} className="flex cursor-pointer justify-between">
+            <div onClick={() => router.push(`/profile/${podcaster.clerkId}`) } key={podcaster._id} className="flex cursor-pointer justify-between hover:bg-black-1 rounded-lg p-2">
               <figure className="flex items-center gap-2">
                 <Image 
                 src={podcaster.imageUrl} 
@@ -63,9 +63,9 @@ const RightSidebar = () => {
           ))}
         </div>
       </section>
-      <section className="flex flex-col truncate mt-10">
+      <section className="flex flex-col mt-10">
         <h2 className='text-16 font-bold text-white-1 mb-5'>Recently Added</h2>
-          {trendingPodcasts?.slice(0, 3).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
+          {trendingPodcasts?.slice(0, 4).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
               <PodcastListItem
               key={_id}
               imgUrl={imageUrl!}
@@ -74,6 +74,7 @@ const RightSidebar = () => {
               title={podcastTitle}
               description={podcastDescription}
               podcastId={_id}
+              isCompact={true}
               />
           ))}
       </section>

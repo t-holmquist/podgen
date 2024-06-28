@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation'
 import { IoMdMusicalNote } from 'react-icons/io'
 import { FaClock } from "react-icons/fa";
 import { formatTime } from "@/lib/formatTime";
+import { cn } from '@/lib/utils'
 
-const PodcastCard = ( { imgUrl, title, description, podcastId, views, duration } : PodcastListItemProps ) => {
+const PodcastCard = ( { imgUrl, title, description, podcastId, views, duration, isCompact } : PodcastListItemProps ) => {
 
   const router = useRouter();
   // navigate to podcast page with specific id
@@ -23,18 +24,22 @@ const PodcastCard = ( { imgUrl, title, description, podcastId, views, duration }
       <div className='flex items-center text-white-1 gap-2'>
         <Image src={imgUrl} width={50} height={50} alt={title} />
         <div className='flex flex-col'>
-            <h2 className='text-white-1 font-bold text-16 truncate max-w-[250px]'>{title}</h2>
-            <p className='text-white-2 text-14 truncate max-w-[250px]'>{description}</p>
+            <h2 className={cn('text-white-1 font-bold text-16 truncate max-w-[250px]', {'max-w-[170px]' : isCompact})}>{title}</h2>
+            <p className={cn('text-white-2 text-14 truncate max-w-[250px]', {'max-w-[170px]' : isCompact})}>{description}</p>
         </div>
       </div>
-      <div className='flex text-white-1 items-center gap-2'>
-        <IoMdMusicalNote />
-        <p className='text-white-2'>{views}</p>
-      </div>
-      <div className='flex items-center text-white-1 gap-2'>
-        <FaClock size={12}/>
-        <p className='text-white-2'>{formatTime(duration)}</p>
-      </div>
+      {!isCompact && (
+      <>
+        <div className='flex text-white-1 items-center gap-2'>
+          <IoMdMusicalNote />
+          <p className='text-white-2'>{views}</p>
+        </div>
+        <div className='flex items-center text-white-1 gap-2'>
+          <FaClock size={12}/>
+          <p className='text-white-2'>{formatTime(duration)}</p>
+        </div>
+      </>
+      )}
     </div>
   )
 }

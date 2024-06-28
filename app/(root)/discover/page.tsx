@@ -85,6 +85,7 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
             title={podcastTitle}
             description={podcastDescription}
             podcastId={_id}
+            isCompact={false}
             />
         ))}
         </section>
