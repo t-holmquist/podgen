@@ -29,7 +29,6 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
 
   // called in uploadImage()
   const handleImage = async (blob: Blob, fileName: string) => {
-    setIsImageLoading(true)
     setImage('')
 
     try {
@@ -55,11 +54,13 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
   // generate image with AI - handleGenerateThumbnail comes from openai.ts
   const generateImage = async () => {
     try {
+      setIsImageLoading(true)
       const response = await handleGenerateThumbnail({ prompt: imagePrompt })
       const blob = new Blob([response], { type: 'image/png' });
       handleImage(blob, `thumbnail-${uuidv4()}`);
       
     } catch (error) {
+      setIsImageLoading(false)
       console.log(error)
       toast({
         title: 'Error generating thumbnail',
@@ -128,7 +129,7 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
           </div>
 
           <div className="w-full max-w-[200px]">
-            <Button onClick={generateImage} type="submit" className="text-16 bg-primary-1 py-4 font-bold text-white-1">
+            <Button onClick={generateImage} type="button" className="text-16 bg-primary-1 py-4 font-bold text-white-1">
               {isImageLoading ? (
                 <>
                   Generating
@@ -151,7 +152,7 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
           />
           {/* Ready to upload image */}
           {!isImageLoading ? (
-            <Image src='/icons/upload-image.svg' width={40} height={40} alt="upload"/>
+            <Image src='/icons/upload-image.svg' width={15} height={15} alt="upload"/>
           ) : (
             <div className="text-16 flex-center font-medium text-white-1">
               Uploading
@@ -159,10 +160,10 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
             </div>
           )}
           <div className="flex flex-col items-center gap-1">
-            <h2 className="text-12 font-bold text-primary-1">
+            <h2 className="text-12 font-bold text-accent-3">
               Click to upload
             </h2>
-            <p className="text-12 font-normal text-gray-1">SVG, JPG, PNG or GIF (max: 1080x1080px)</p>
+            <p className="text-12 font-normal text-gray-1">JPG, SVG, PNG (max resolution: 1080x1080px)</p>
           </div>
         </div>
         
