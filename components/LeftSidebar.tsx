@@ -80,10 +80,11 @@ const LeftSidebar = () => {
               <GlareCard className='flex flex-col items-start justify-start py-8 px-6 gap-2'>
                 <h2 className='font-extrabold'>This is a porfolio project</h2>
                 <p className='text-12 text-white-2'>It is developed by myself <span className='text-white-1 font-bold'>Tjalfe Holmquist</span>
-                <br></br>
-                Read more on GitHub
                 </p>
-                <FaGithub size={20}/>
+                <p className='flex gap-2 text-white-2 text-12'>
+                  Click to read more
+                  <FaGithub size={15}/>
+                </p>
               </GlareCard>
             </Link>
           </motion.div>
