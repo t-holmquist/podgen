@@ -10,7 +10,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { Button } from './ui/button';
 import { useAudio } from '@/providers/AudioProvider';
-import { IoIosLogOut } from "react-icons/io";
+import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
 import { motion } from "framer-motion"
 import { LucideArrowLeftToLine, LucideArrowRightToLine } from 'lucide-react';
 
@@ -73,9 +73,15 @@ const LeftSidebar = () => {
       </nav>
       {/* Different view depending on signin/out status */}
       <SignedOut>
-        <div className='flex-center w-full pb-14 max-lg:px-4 lg:pr-8'>
-          <Button asChild className='text-16 w-full bg-primary-1 font-extrabold'>
-            <Link href='/sign-in'>Sign in</Link>
+        <div className='flex-center items-center w-full pb-14'>
+          <Button asChild className='text-16 w-full hover:bg-accent-2 mx-3 rounded-2xl border border-primary-1 font-extrabold'>
+            {isOpen ? (
+              <Link href='/sign-in'>Sign in</Link>
+            ) : (
+              <Link href='/sign-in'>
+                <IoIosLogIn />
+              </Link>
+            )} 
           </Button>
         </div>
       </SignedOut>
