@@ -19,10 +19,10 @@ const EmptyState = ( { title, search, buttonLink, buttonText } : EmptyStateProps
             )}
 
             {buttonLink && (
-                <Button className='bg-primary-1'>
+                <Button className='border border-primary-1 rounded-2xl hover:bg-accent-1'>
                     <Link href={buttonLink} className='flex gap-1'>
                         <Image
-                        src='/icons/discover.svg'
+                        src='/icons/lightning.svg'
                         width={20}
                         height={20}
                         alt='discover'
