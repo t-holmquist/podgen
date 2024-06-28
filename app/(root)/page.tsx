@@ -22,7 +22,7 @@ const Home = () => {
   // get user and display name if exists
   const { user } = useUser();
 
-  if(!user || !trendingPodcasts || !topPodcasters) return <LoaderSpinner />
+  if(!trendingPodcasts || !topPodcasters) return <LoaderSpinner />
   
 
   return (
@@ -33,7 +33,7 @@ const Home = () => {
       <section className='flex flex-col'>
         <h2 className='text-16 font-bold text-white-1'>{user ? 'Continue where you left off' : 'Many people like these'}</h2>
         <div className='podcast_grid mt-5'>
-          {trendingPodcasts?.slice(0, 10).map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (
+          {trendingPodcasts?.slice(0, 8).map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (
             <PodcastCard
             key={_id}
             imgUrl={imageUrl!}
@@ -50,7 +50,7 @@ const Home = () => {
           <div className='text-white-2'>Duration</div>
         </div>
         <section>
-        {trendingPodcasts?.slice(0, 10).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
+        {trendingPodcasts?.slice(0, 8).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
             <PodcastListItem
             key={_id}
             imgUrl={imageUrl!}
