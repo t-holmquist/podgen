@@ -56,7 +56,7 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
             <button key={categorySelected} onClick={() => setCategory(categorySelected)} className={cn('bg-black-5 text-12 hover:bg-black-6 rounded-2xl p-2 font-bold', { 'bg-primary-1' : categorySelected === category } )}>{categorySelected}</button>
           ))}
         </div>
-        {podcastByCategory && (
+        {podcastByCategory ? (
           <div className='podcast_grid'>
             {podcastByCategory?.slice(0, 5).map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (
                   <PodcastCard
@@ -68,26 +68,34 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
                   />
               ))}
           </div>
+        ) : (
+          <LoaderSpinner />
         )}
         <h2 className='text-16 font-bold text-white-1 mt-5'>Top Podcasts in: <span className='text-white-2'>{category}</span></h2>
         <div className='flex justify-between items-center border-gray-1 border-opacity-30 border-b py-1 mt-5'>
           <div className='text-white-2'>Title</div>
-          <div className='text-white-2 ml-72'>Views</div>
+          <div className='text-white-2 ml-40 sm:ml-72'>Views</div>
           <div className='text-white-2'>Duration</div>
         </div>
-        <section>
-        {TopPodcastByCategory?.slice(0, 5).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
-            <PodcastListItem
-            key={_id}
-            imgUrl={imageUrl!}
-            views={views}
-            duration={audioDuration}
-            title={podcastTitle}
-            description={podcastDescription}
-            podcastId={_id}
-            isCompact={false}
-            />
-        ))}
+        <section className='pb-10 sm:pb-0'>
+        {TopPodcastByCategory ? (
+          <>
+            {TopPodcastByCategory?.slice(0, 5).map(({ _id, imageUrl, podcastTitle, podcastDescription, views, audioDuration}) => (
+              <PodcastListItem
+              key={_id}
+              imgUrl={imageUrl!}
+              views={views}
+              duration={audioDuration}
+              title={podcastTitle}
+              description={podcastDescription}
+              podcastId={_id}
+              isCompact={false}
+              />
+            ))}
+          </>
+        ) : (
+          <LoaderSpinner />
+        )}
         </section>
       </div>
     </div>
