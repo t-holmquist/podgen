@@ -46,7 +46,7 @@ const Home = () => {
         <h2 className='text-16 font-bold text-white-1 mt-5'>Most popular podcasts</h2>
         <div className='flex justify-between items-center border-gray-1 border-opacity-30 border-b py-1 mt-5'>
           <div className='text-white-2'>Title</div>
-          <div className='text-white-2 ml-40 sm:ml-72'>Views</div>
+          <div className='text-white-2 ml-40 sm:ml-52'>Views</div>
           <div className='text-white-2'>Duration</div>
         </div>
         <section>

@@ -74,7 +74,7 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
         <h2 className='text-16 font-bold text-white-1 mt-5'>Top Podcasts in: <span className='text-white-2'>{category}</span></h2>
         <div className='flex justify-between items-center border-gray-1 border-opacity-30 border-b py-1 mt-5'>
           <div className='text-white-2'>Title</div>
-          <div className='text-white-2 ml-40 sm:ml-72'>Views</div>
+          <div className='text-white-2 ml-40 sm:ml-52'>Views</div>
           <div className='text-white-2'>Duration</div>
         </div>
         <section className='pb-10 sm:pb-0'>

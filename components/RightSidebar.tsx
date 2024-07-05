@@ -34,7 +34,6 @@ const RightSidebar = () => {
             <h2 className="text-14 truncate font-semibold text-white-1">
               {user?.firstName} {user?.lastName}
             </h2>
-            <Image src='/icons/notification.svg' width={15} height={15} alt="notification"/>
           </div>
         </Link>
       </SignedIn>
