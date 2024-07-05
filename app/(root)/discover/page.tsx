@@ -32,7 +32,7 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
           <>
             {podcastsData.length > 0 ? (
               <div className='podcast_grid'>
-                {podcastsData?.slice(0, 5).map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (
+                {podcastsData?.slice(0, 4).map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (
                   <PodcastCard
                   key={_id}
                   imgUrl={imageUrl!}
@@ -51,9 +51,9 @@ const Discover = ({ searchParams: { search } }: { searchParams: { search: string
         )}
         <h2 className='text-16 font-bold text-white-1'>Discover by category: <span className='text-white-2'>{category}</span></h2>
         {/* Categories */}
-        <div className='flex gap-2 text-white-1'>
+        <div className='flex flex-wrap gap-2 text-white-1'>
           {categories.map((categorySelected) => (
-            <button key={categorySelected} onClick={() => setCategory(categorySelected)} className={cn('bg-black-5 text-12 hover:bg-black-6 rounded-2xl p-2 font-bold', { 'bg-primary-1' : categorySelected === category } )}>{categorySelected}</button>
+            <button key={categorySelected} onClick={() => setCategory(categorySelected)} className={cn('bg-black-5 text-12 hover:bg-primary-1 rounded-2xl p-2 font-bold', { 'bg-primary-1' : categorySelected === category } )}>{categorySelected}</button>
           ))}
         </div>
         {podcastByCategory ? (

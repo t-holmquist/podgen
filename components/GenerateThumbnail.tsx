@@ -121,7 +121,7 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
             </Label>
             <Textarea 
               className="input-class font-light focus-visible:ring-offset-primary-1" 
-              placeholder="Your text goes here"
+              placeholder="A minimalistic painting of a cyborg astronaut gazing out at a distant planet"
               rows={5}
               value={imagePrompt}
               onChange={(e) => setImagePrompt(e.target.value)}
