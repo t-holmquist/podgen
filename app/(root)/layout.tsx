@@ -23,6 +23,7 @@ export default function RootLayout({
                     width={50} 
                     height={50}
                     alt='logo'
+                    priority
                     />
                   <MobileNav />
                 </div>
