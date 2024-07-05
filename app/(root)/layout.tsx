@@ -18,13 +18,16 @@ export default function RootLayout({
             <section className="flex flex-col overflow-hidden min-h-screen flex-1 px-4 sm:px-14">
               <div className="mx-auto flex flex-col w-full max-sm:px-4">
                 <div className="flex h-16 items-center justify-between md:hidden">
-                  <Image 
-                    src='/icons/logo-diamond.svg' 
-                    width={50} 
-                    height={50}
-                    alt='logo'
-                    priority
-                    />
+                  <div className="flex items-center gap-1">
+                    <Image 
+                      src='/icons/logo-diamond.svg' 
+                      width={40} 
+                      height={40}
+                      alt='logo'
+                      priority
+                      />
+                    <p className="text-white-1 font-bold">PodGen</p>
+                  </div>
                   <MobileNav />
                 </div>
                 <div className="flex flex-col md:pb-14">
