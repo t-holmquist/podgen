@@ -15,7 +15,7 @@ const UserAvatar = ( { imageUrl, name, clerkId} : UserAvatarProps) => {
           width={200}
           height={200}
           alt={name}
-          className='h-fit w-full rounded-full sm:w-40 2xl:size-[150px]'
+          className='h-fit rounded-full sm:w-40 2xl:size-[150px]'
         />
         <div className='flex flex-col'>
           <h2 className='text-14 truncate font-bold text-white-1'>{name}</h2>
