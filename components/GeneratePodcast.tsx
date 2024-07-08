@@ -94,11 +94,12 @@ const GeneratePodcast = (props : GeneratePodcastProps) => {
     <div>
       <div className="flex flex-col gap-2.5">
         <Label className="text-16 font-bold text-white-1">
-          Insert you prompt below
+          Insert you text prompt below
         </Label>
+        <p className="text-12 text-white-2">* Automatically detects and supports multiple languages</p>
         <Textarea 
           className="input-class font-light focus-visible:ring-offset-primary-1" 
-          placeholder="Your text goes here"
+          placeholder="Podcast text goes here"
           rows={5}
           value={props.voicePrompt}
           onChange={(e) => props.setVoicePrompt(e.target.value)}

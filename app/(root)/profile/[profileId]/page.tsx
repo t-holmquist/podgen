@@ -8,6 +8,8 @@ import Image from 'next/image'
 import React from 'react'
 import { useAudio } from "@/providers/AudioProvider";
 import LoaderSpinner from '@/components/LoaderSpinner'
+import { MovingBorderButton } from '@/components/ui/movingBorder'
+import { GiAchievement } from "react-icons/gi";
 
 const Profile = ( { params: { profileId } } : { params: { profileId: string } } ) => {
 
@@ -34,10 +36,10 @@ const Profile = ( { params: { profileId } } : { params: { profileId: string } } 
 
   return (
     <section className='flex flex-col mt-10'>
-      <h1 className='text-white-1 text-xl font-bold'>Podcaster Profile</h1>
-      <div className='flex sm:gap-15 mt-10 flex-wrap gap-10'>
+      <h1 className='text-white-1 text-xl font-bold'>{`${user?.name}s Profile`}</h1>
+      <div className='flex sm:gap-14 mt-10 lg:flex-nowrap flex-wrap gap-10'>
         <Image src={user?.imageUrl!} width={200} height={200} alt='profile' className='rounded-xl'/>
-        <div className='flex flex-col gap-6'>
+        <div className='flex flex-col gap-6 mt-10 sm:mt-0'>
           <div className='flex gap-3'>
             <Image src='/icons/verified.svg' width={20} height={20} alt='verified'/>
             <p className='text-white-2 text-12'>Verified user</p>
@@ -51,9 +53,29 @@ const Profile = ( { params: { profileId } } : { params: { profileId: string } } 
             Play a random podcast
           </Button>
         </div>
+        {/* Non dynamic achievements */}
+        <div className='w-full max-w-[330px] mt-10 sm:mt-0'>
+          <div className='flex justify-center gap-2'>
+            <GiAchievement className='text-white-1 bg-primary-1 rounded-full p-[2px]'/>
+            <h2 className='text-white-2 text-12'>Achievements</h2>
+          </div>
+          <MovingBorderButton
+          duration={11000}
+          >
+            <div className='flex justify-center flex-wrap gap-2 p-2'>
+              <div className='text-12 text-white-1 border border-accent-1 rounded-2xl font-normal p-2'>30k listeners</div>
+              <div className='text-12 text-white-1 border border-accent-1 rounded-2xl font-normal p-2'>5 Episodes Created</div>
+              <div className='text-12 text-white-1 border border-accent-1 rounded-2xl font-normal p-2'>Top 100 most popular podcaster</div>
+              <div className='text-12 text-white-1 border border-accent-1 rounded-2xl font-normal p-2'>Top 5 in sports</div>
+            </div>
+          </MovingBorderButton>
+        </div>
       </div>
       <section className='mt-10'>
-      <h2 className='text-white-1 font-bold text-20'>All Podcasts</h2>
+      {/* Non dynamic about me */}
+      <h2 className='mt-5 text-white-1 font-bold text-20'>About me</h2>
+      <p className='mt-5 text-white-2 text-16'>I enjoy making content that people enjoy, but never had a great podcast voice. This platform enables me to get my thoughts out there without sacrificing both time and audio quality.</p>
+      <h2 className='mt-5 text-white-1 font-bold text-20'>All Podcasts</h2>
         <div className='podcast_grid mt-5'>
           {userPodcasts?.podcasts?.map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (
                 <PodcastCard
