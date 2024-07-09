@@ -64,7 +64,7 @@ const LeftSidebar = () => {
 
           const isActive = pathname === route || pathname.startsWith(`${route}/`);
 
-          return <motion.div layout key={label} ><Link href={route} key={label} className={cn('flex gap-3 items-center py-2 mx-3 justify-center hover:bg-accent-2 border border-primary-1 rounded-2xl', {'bg-accent-1': isActive})}>
+          return <motion.div layout key={label} ><Link href={route} key={label} className={cn('flex gap-3 items-center py-2 mx-3 justify-center hover:bg-slate-900 border border-primary-1 rounded-2xl', {'bg-accent-1 hover:bg-accent-1': isActive})}>
             <Image src={imgURL} alt={label} width={20} height={20}/>
             {isOpen && (
               <p>{label}</p>
@@ -92,7 +92,7 @@ const LeftSidebar = () => {
         {/* Different view depending on signin/out status */}
         <SignedOut>
           <div className='flex-center items-center w-full pb-14'>
-            <Button asChild className='text-16 w-full hover:bg-accent-2 mx-3 rounded-2xl border border-primary-1 font-extrabold'>
+            <Button asChild className='text-16 w-full hover:bg-slate-900 mx-3 rounded-2xl border border-primary-1 font-extrabold'>
               {isOpen ? (
                 <Link href='/sign-in'>Sign in</Link>
               ) : (
@@ -105,7 +105,7 @@ const LeftSidebar = () => {
         </SignedOut>
         <SignedIn>
           <div className='flex items-center w-full pb-14'>
-            <Button onClick={() => signOut(() => router.push('/'))} className='text-16 w-full hover:bg-accent-2 mx-3 rounded-2xl border border-primary-1 font-extrabold'>
+            <Button onClick={() => signOut(() => router.push('/'))} className='text-16 w-full hover:bg-slate-900 mx-3 rounded-2xl border border-primary-1 font-extrabold'>
               {isOpen ? (
                 'Log Out'
               ) : (

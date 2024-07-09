@@ -64,8 +64,8 @@ const Profile = ( { params: { profileId } } : { params: { profileId: string } } 
           >
             <div className='flex justify-center flex-wrap gap-2 p-2'>
               <div className='text-12 text-white-1 border border-accent-1 rounded-2xl font-normal p-2'>30k listeners</div>
-              <div className='text-12 text-white-1 border border-accent-1 rounded-2xl font-normal p-2'>5 Episodes Created</div>
-              <div className='text-12 text-white-1 border border-accent-1 rounded-2xl font-normal p-2'>Top 100 most popular podcaster</div>
+              <div className='text-12 text-white-1 border border-accent-1 rounded-2xl font-normal p-2'>5 Podcasts Created</div>
+              <div className='text-12 text-white-1 border border-accent-1 rounded-2xl font-normal p-2'>Top 100 most popular</div>
               <div className='text-12 text-white-1 border border-accent-1 rounded-2xl font-normal p-2'>Top 5 in sports</div>
             </div>
           </MovingBorderButton>
@@ -73,7 +73,7 @@ const Profile = ( { params: { profileId } } : { params: { profileId: string } } 
       </div>
       <section className='mt-10'>
       {/* Non dynamic about me */}
-      <h2 className='mt-5 text-white-1 font-bold text-20'>About me</h2>
+      <h2 className='mt-5 text-white-1 font-bold text-20'>{`About ${user?.name}`}</h2>
       <p className='mt-5 text-white-2 text-16'>I enjoy making content that people enjoy, but never had a great podcast voice. This platform enables me to get my thoughts out there without sacrificing both time and audio quality.</p>
       <h2 className='mt-5 text-white-1 font-bold text-20'>All Podcasts</h2>
         <div className='podcast_grid mt-5'>
