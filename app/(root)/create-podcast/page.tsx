@@ -224,7 +224,7 @@ const CreatePodcast = () => {
             />
 
             <div className="mt-10 w-full">
-              <Button type="submit" className="text-16 w-full bg-primary-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1">
+              <Button type="submit" className="text-16 w-full border border-primary-1 rounded-2xl py-4 font-extrabold text-white-1 hover:bg-slate-900">
                 {isSubmitting ? (
                   <>
                     Submitting
