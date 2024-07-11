@@ -11,6 +11,7 @@ import { useUploadFiles } from '@xixixao/uploadstuff/react'
 import { useToast } from "@/components/ui/use-toast"
 import { TextGenerateEffect } from "./ui/textGenerateEffect"
 import { IoSparkles } from "react-icons/io5";
+import { Skeleton } from "./ui/skeleton"
 
 
 
@@ -141,6 +142,16 @@ const GeneratePodcast = (props : GeneratePodcastProps) => {
           )}
         </Button>
       </div>
+      
+      {/* Skeleton loader */}
+      {isGenerating && (
+        <div className="flex flex-col gap-3 mt-5">
+          <Skeleton className="h-4 w-[150px]" />
+          <Skeleton className="h-4 w-[280px]" />
+          <Skeleton className="h-[125px] w-full rounded-xl" />
+          <Skeleton className="h-4 w-[250px]" />
+        </div>
+      )}
 
       {/* If audio is generated then render AI suggested title, description and audio player */}
       {props.audio && (

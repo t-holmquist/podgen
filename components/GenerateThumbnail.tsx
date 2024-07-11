@@ -12,6 +12,7 @@ import { useAction, useMutation } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { useUploadFiles } from "@xixixao/uploadstuff/react"
 import { v4 as uuidv4 } from 'uuid';
+import { Skeleton } from "./ui/skeleton"
 
 const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, setImagePrompt } : GenerateThumbnailProps ) => {
 
@@ -140,6 +141,13 @@ const GenerateThumbnail = ( { setImage, setImageStorageId, image, imagePrompt, s
               )}
             </Button>
           </div>
+
+          {/* Skeleton loader */}
+          {isImageLoading && (
+          <div className="flex justify-center gap-3 mt-5">
+            <Skeleton className="h-[180px] w-[180px] rounded-xl" />
+          </div>
+        )}
         </div>
       ) : (
         // If upload custom image is chosen
