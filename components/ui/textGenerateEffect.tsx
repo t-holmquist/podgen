@@ -5,9 +5,11 @@ import { cn } from "@/utils/cn";
 
 export const TextGenerateEffect = ({
   words,
+  staggerAmount,
   className,
 }: {
   words: string;
+  staggerAmount: number;
   className?: string;
 }) => {
   const [scope, animate] = useAnimate();
@@ -20,7 +22,7 @@ export const TextGenerateEffect = ({
       },
       {
         duration: 2,
-        delay: stagger(0.2),
+        delay: stagger(staggerAmount),
       }
     );
   }, [scope.current]);

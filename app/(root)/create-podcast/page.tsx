@@ -196,6 +196,7 @@ const CreatePodcast = () => {
             render={({ field }) => (
               <FormItem className="flex flex-col gap-2.5">
                 <FormLabel className="text-16 font-bold text-white-1">Description</FormLabel>
+                <p className="text-12 text-white-2">* Get AI suggested description after generating audio</p>
                 <FormControl>
                   <Textarea className="input-class focus-visible:ring-offset-primary-1" placeholder="Write a short description" {...field} />
                 </FormControl>

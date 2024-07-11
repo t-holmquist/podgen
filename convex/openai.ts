@@ -51,13 +51,12 @@ export const generateThumbnailAction = action({
 
 
 // Suggestion title based on podcast audio transcription - should trigger once generated
-
 export const suggestTitleAction = action({
 
   args: { prompt: v.string() },
   handler: async (_, args) => {
 
-    const systemPrompt = process.env.OPENAI_SYSTEM_PROMPT;
+    const systemPrompt = process.env.OPENAI_TITLE_SYSTEM_PROMPT;
 
     const completion = await openai.chat.completions.create({
       messages: [{"role": "system", "content": systemPrompt!},
@@ -70,3 +69,20 @@ export const suggestTitleAction = action({
   },
 });
 
+export const suggestDescriptionAction = action({
+
+  args: { prompt: v.string() },
+  handler: async (_, args) => {
+
+    const systemPrompt = process.env.OPENAI_DESCRIPTION_SYSTEM_PROMPT;
+
+    const completion = await openai.chat.completions.create({
+      messages: [{"role": "system", "content": systemPrompt!},
+        {"role": "user", "content": args.prompt},
+      ],
+      model: "gpt-4o",
+    });
+    
+    return completion.choices[0].message.content;
+  },
+});

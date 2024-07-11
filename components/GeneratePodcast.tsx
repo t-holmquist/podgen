@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useUploadFiles } from '@xixixao/uploadstuff/react'
 import { useToast } from "@/components/ui/use-toast"
 import { TextGenerateEffect } from "./ui/textGenerateEffect"
+import { IoSparkles } from "react-icons/io5";
 
 
 
@@ -33,9 +34,13 @@ const useGeneratePodcast = ( {
   // extract convex mutation from podcasts.ts
   const getAudioUrl = useMutation(api.podcasts.getUrl);
 
-  // extract AI title suggestion and state for setting title
+  // extract AI title & description suggestion and state for setting title
   const getSuggestedTitle = useAction(api.openai.suggestTitleAction)
   const [suggestedTitle, setSuggestedTitle] = useState('')
+  const getSuggestedDescription = useAction(api.openai.suggestDescriptionAction)
+  const [suggestedDescription, setSuggestedDescription] = useState('')
+
+
 
   const generatePodcast = async () => {
     // Reset audio when starting to generate
@@ -57,9 +62,12 @@ const useGeneratePodcast = ( {
       })
 
 
-      // Get AI suggested title based on voiceprompt from openAI. Then set the state so that it can be returned.
+      // Get AI suggested title & description based on voiceprompt from openAI. Then set the state so that it can be returned.
       const suggestedTitle = await getSuggestedTitle({prompt: voicePrompt})
       setSuggestedTitle(suggestedTitle!)
+      const suggestedDescription = await getSuggestedDescription({prompt: voicePrompt})
+      setSuggestedDescription(suggestedDescription!)
+
       
       
       const blob = new Blob([response], { type: 'audio/mpeg' });
@@ -95,13 +103,13 @@ const useGeneratePodcast = ( {
   }
 
   
-  return {isGenerating, generatePodcast, suggestedTitle}
+  return {isGenerating, generatePodcast, suggestedTitle, suggestedDescription}
 }
 
 
 const GeneratePodcast = (props : GeneratePodcastProps) => {
 
-  const { isGenerating, generatePodcast, suggestedTitle } = useGeneratePodcast(props);
+  const { isGenerating, generatePodcast, suggestedTitle, suggestedDescription } = useGeneratePodcast(props);
 
   
 
@@ -134,23 +142,37 @@ const GeneratePodcast = (props : GeneratePodcastProps) => {
         </Button>
       </div>
 
+      {/* If audio is generated then render AI suggested title, description and audio player */}
       {props.audio && (
+        <>
+          <div className="flex mt-5 gap-2 items-center">
+            <h2 className="text-white-1 font-bold text-16">AI suggestions</h2>
+            <IoSparkles className="text-white-1 animate-bounce"/>
+          </div>
           <div className="flex flex-col mt-5 gap-5 items-center bg-primary-1 w-fit rounded-xl p-3">
             {suggestedTitle && (
             <div className="flex gap-2 items-center rounded-xl p-1">
-              <p className="text-white-1 font-bold text-14">AI suggested title: </p>
-              <TextGenerateEffect words={suggestedTitle} />
+              <p className="text-white-1 font-bold text-14">Title: </p>
+              <TextGenerateEffect words={suggestedTitle} staggerAmount={0.2} />
             </div>
             )}
-
-            <audio
-            controls
-            src={props.audio}
-            autoPlay
-            className="h-6 self-start"
-            onLoadedMetadata={(e) => props.setAudioDuration(e.currentTarget.duration)}
-            />
         </div>
+        <div className="mt-5 gap-5 items-center bg-primary-1 w-fit rounded-xl p-2">
+          {suggestedDescription && (
+              <div className="flex flex-col gap-2 rounded-xl p-1">
+                <p className="text-white-1 font-bold text-14">Description: </p>
+                <TextGenerateEffect words={suggestedDescription} staggerAmount={0.1}/>
+              </div>
+              )}
+        </div>
+        <audio
+          controls
+          src={props.audio}
+          autoPlay
+          className="mt-5 h-10 self-start"
+          onLoadedMetadata={(e) => props.setAudioDuration(e.currentTarget.duration)}
+          />
+      </>
       )}
 
     </div>
