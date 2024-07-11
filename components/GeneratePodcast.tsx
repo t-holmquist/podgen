@@ -9,6 +9,7 @@ import { api } from "@/convex/_generated/api"
 import { v4 as uuidv4 } from 'uuid';
 import { useUploadFiles } from '@xixixao/uploadstuff/react'
 import { useToast } from "@/components/ui/use-toast"
+import { TextGenerateEffect } from "./ui/textGenerateEffect"
 
 
 
@@ -32,6 +33,10 @@ const useGeneratePodcast = ( {
   // extract convex mutation from podcasts.ts
   const getAudioUrl = useMutation(api.podcasts.getUrl);
 
+  // extract AI title suggestion and state for setting title
+  const getSuggestedTitle = useAction(api.openai.suggestTitleAction)
+  const [suggestedTitle, setSuggestedTitle] = useState('')
+
   const generatePodcast = async () => {
     // Reset audio when starting to generate
     setIsGenerating(true);
@@ -50,6 +55,12 @@ const useGeneratePodcast = ( {
         input: voicePrompt,
         voice: voiceType!,
       })
+
+
+      // Get AI suggested title based on voiceprompt from openAI. Then set the state so that it can be returned.
+      const suggestedTitle = await getSuggestedTitle({prompt: voicePrompt})
+      setSuggestedTitle(suggestedTitle!)
+      
       
       const blob = new Blob([response], { type: 'audio/mpeg' });
       // use the uuid library to get random id for each file
@@ -83,12 +94,16 @@ const useGeneratePodcast = ( {
     
   }
 
-  return {isGenerating, generatePodcast}
+  
+  return {isGenerating, generatePodcast, suggestedTitle}
 }
+
 
 const GeneratePodcast = (props : GeneratePodcastProps) => {
 
-  const { isGenerating, generatePodcast } = useGeneratePodcast(props);
+  const { isGenerating, generatePodcast, suggestedTitle } = useGeneratePodcast(props);
+
+  
 
   return (
     <div>
@@ -120,13 +135,22 @@ const GeneratePodcast = (props : GeneratePodcastProps) => {
       </div>
 
       {props.audio && (
-        <audio
-        controls
-        src={props.audio}
-        autoPlay
-        className="mt-5"
-        onLoadedMetadata={(e) => props.setAudioDuration(e.currentTarget.duration)}
-        />
+          <div className="flex flex-col mt-5 gap-5 items-center bg-primary-1 w-fit rounded-xl p-3">
+            {suggestedTitle && (
+            <div className="flex gap-2 items-center rounded-xl p-1">
+              <p className="text-white-1 font-bold text-14">AI suggested title: </p>
+              <TextGenerateEffect words={suggestedTitle} />
+            </div>
+            )}
+
+            <audio
+            controls
+            src={props.audio}
+            autoPlay
+            className="h-6 self-start"
+            onLoadedMetadata={(e) => props.setAudioDuration(e.currentTarget.duration)}
+            />
+        </div>
       )}
 
     </div>

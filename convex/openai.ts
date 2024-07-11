@@ -66,7 +66,7 @@ export const suggestTitleAction = action({
       model: "gpt-4o",
     });
     
-    return completion.choices[0];
+    return completion.choices[0].message.content;
   },
 });
 
