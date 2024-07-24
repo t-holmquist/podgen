@@ -118,7 +118,7 @@ const GeneratePodcast = (props : GeneratePodcastProps) => {
     <div>
       <div className="flex flex-col gap-2.5">
         <Label className="text-16 font-bold text-white-1">
-          Insert you text prompt below
+          Insert your text prompt below
         </Label>
         <p className="text-12 text-white-2">* Automatically detects and supports multiple languages</p>
         <Textarea 
