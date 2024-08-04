@@ -27,16 +27,10 @@ const PodcastDetails = ( { params: { podcastId } }: {params: { podcastId: Id<'po
 
   return (
     <section className='flex w-full flex-col mb-20 sm:mb-10'>
-      <header className='mt-9 flex items-center justify-between'>
+      <header className='mt-9 flex items-center'>
         <h1 className='text-20 font-bold text-white-1'>
           Currently playing
         </h1>
-        <figure className='flex gap-3'>
-        <Image src='/icons/headphone.svg' width={24} height={24} alt='headphone'/>
-        </figure>
-        <h2 className='text-16 font-bold text-white-1'>
-        {podcast?.views}
-        </h2>
       </header>
 
       {/* Gets all podcast properties and also know if user owns podcast */}
