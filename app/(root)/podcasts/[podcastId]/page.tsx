@@ -26,7 +26,7 @@ const PodcastDetails = ( { params: { podcastId } }: {params: { podcastId: Id<'po
 
 
   return (
-    <section className='flex w-full flex-col'>
+    <section className='flex w-full flex-col mb-20 sm:mb-10'>
       <header className='mt-9 flex items-center justify-between'>
         <h1 className='text-20 font-bold text-white-1'>
           Currently playing

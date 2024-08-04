@@ -35,10 +35,11 @@ const Profile = ( { params: { profileId } } : { params: { profileId: string } } 
   };
 
   return (
-    <section className='flex flex-col mt-10'>
+    <section className='flex flex-col mt-10 mb-20 sm:mb-10'>
       <h1 className='text-white-1 text-xl font-bold'>{`${user?.name}s Profile`}</h1>
-      <div className='flex sm:gap-14 mt-10 lg:flex-nowrap flex-wrap gap-10'>
-        <Image src={user?.imageUrl!} width={200} height={200} alt='profile' className='rounded-xl'/>
+      <div className='flex flex-col  sm:flex-row sm:gap-14 mt-10 lg:flex-nowrap gap-4'>
+        <Image src={user?.imageUrl!} width={200} height={200} alt='profile' className='hidden sm:block rounded-xl'/>
+        <Image src={user?.imageUrl!} width={300} height={200} alt='profile' className='sm:hidden rounded-xl'/>
         <div className='flex flex-col gap-6 mt-10 sm:mt-0'>
           <div className='flex gap-3'>
             <Image src='/icons/verified.svg' width={20} height={20} alt='verified'/>
@@ -55,7 +56,7 @@ const Profile = ( { params: { profileId } } : { params: { profileId: string } } 
         </div>
         {/* Non dynamic achievements */}
         <div className='w-full max-w-[330px] mt-10 sm:mt-0'>
-          <div className='flex justify-center gap-2'>
+          <div className='flex justify-start sm:justify-center gap-2'>
             <GiAchievement className='text-white-1 bg-primary-1 rounded-full p-[2px]'/>
             <h2 className='text-white-2 text-12'>Achievements</h2>
           </div>

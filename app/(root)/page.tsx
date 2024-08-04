@@ -30,7 +30,7 @@ const Home = () => {
       <div className='flex justify-center'>
         <h1 className='text-20 font-bold text-white-1 border-b border-b-white border-opacity-30 rounded-lg w-fit p-2'>{user ? 'Welcome back - ' + user?.firstName : 'Welcome to PodGen!'}</h1>
       </div>
-      <section className='flex flex-col'>
+      <section className='flex flex-col gap-9 sm:gap-0 mb-20 sm:mb-0'>
         <h2 className='text-16 font-bold text-white-1'>{user ? 'Continue where you left off' : 'Many people like these'}</h2>
         <div className='podcast_grid mt-5'>
           {trendingPodcasts?.slice(0, 8).map(({ _id, imageUrl, podcastTitle, podcastDescription}) => (

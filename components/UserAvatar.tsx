@@ -12,7 +12,7 @@ const UserAvatar = ( { imageUrl, name, clerkId} : UserAvatarProps) => {
       <figure className='flex flex-col items-center gap-2'>
         <Image 
           src={imageUrl}
-          width={200}
+          width={150}
           height={200}
           alt={name}
           className='h-fit rounded-full sm:w-40 2xl:size-[150px]'

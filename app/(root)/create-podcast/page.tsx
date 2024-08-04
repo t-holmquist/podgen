@@ -126,7 +126,7 @@ const CreatePodcast = () => {
   }
 
   return (
-  <section className="mt-10 flex flex-col mb-10">
+  <section className="mt-10 flex flex-col mb-20 sm:mb-10">
     <h1 className='text-20 font-bold text-white-1'>Create Podcast</h1>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-12 flex w-full flex-col">
