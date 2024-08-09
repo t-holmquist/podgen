@@ -7,9 +7,10 @@ The priority for me is to showcase the use of different technologies and interac
 
 ## Features
 * User login and authentication
-* Create AI-generated audio and thumbnail via OpenAI
+* Create AI-generated podcast and thumbnail via OpenAI
 * Implemented AI-generated suggestions in the audio creation flow
 * Custom audio player
+* Discover podcasts based on category
 * Dynamic data fetching across the app - profile page, individual podcasts
 * Modern UI designed from scratch with TailwindCSS and Framer motion
 * A lot of Server rendered content for better performance
