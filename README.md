@@ -1,6 +1,8 @@
 # Project Title
 PodGen - Podcast platform with AI features
 
+<img width="700" alt="homescreen-podgen" src="https://github.com/user-attachments/assets/11d04408-3279-4b95-a677-b24d3a191181">
+
 ## Description
 This portfolio project is a platform where users can login and create AI-generated audio content and see and listen to other users content.
 The priority for me is to showcase the use of different technologies and interactions while creating a robust, fast and secure web application.
